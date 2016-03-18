@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="闲扯," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -57,16 +57,19 @@
 
 
 
-<meta name="description" content="最近一直有写博客的想法，虽一时兴起用hexo搭了个框架，然一直拖到现在才开始，惭愧，之前在csdn上有一个，但并没有坚持下来。用马克飞象写了一些东西，但终究是闭门造车，因为不示与人前，总会有些马马虎虎。用博客来做分享，是非常好总结方式，希望自己坚持下去。">
+<meta name="description" content="IdleHandler的原理
+java garbage collector 对 WeakReference，SoftReference的处理">
 <meta property="og:type" content="article">
-<meta property="og:title" content="开始写博客">
-<meta property="og:url" content="http://yoursite.com/2016/02/23/android绑定service/index.html">
+<meta property="og:title" content="可以展开分析的一些技术点">
+<meta property="og:url" content="http://yoursite.com/2016/03/18/可以展开分析的一些技术点/index.html">
 <meta property="og:site_name" content="Mr.Icefox in coding...">
-<meta property="og:description" content="最近一直有写博客的想法，虽一时兴起用hexo搭了个框架，然一直拖到现在才开始，惭愧，之前在csdn上有一个，但并没有坚持下来。用马克飞象写了一些东西，但终究是闭门造车，因为不示与人前，总会有些马马虎虎。用博客来做分享，是非常好总结方式，希望自己坚持下去。">
-<meta property="og:updated_time" content="2016-03-14T10:14:58.665Z">
+<meta property="og:description" content="IdleHandler的原理
+java garbage collector 对 WeakReference，SoftReference的处理">
+<meta property="og:updated_time" content="2016-03-18T12:39:42.267Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="开始写博客">
-<meta name="twitter:description" content="最近一直有写博客的想法，虽一时兴起用hexo搭了个框架，然一直拖到现在才开始，惭愧，之前在csdn上有一个，但并没有坚持下来。用马克飞象写了一些东西，但终究是闭门造车，因为不示与人前，总会有些马马虎虎。用博客来做分享，是非常好总结方式，希望自己坚持下去。">
+<meta name="twitter:title" content="可以展开分析的一些技术点">
+<meta name="twitter:description" content="IdleHandler的原理
+java garbage collector 对 WeakReference，SoftReference的处理">
 
 
 
@@ -84,7 +87,7 @@
   };
 </script>
 
-  <title> 开始写博客 | Mr.Icefox in coding... </title>
+  <title> 可以展开分析的一些技术点 | Mr.Icefox in coding... </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -204,7 +207,7 @@
             
             
               
-                开始写博客
+                可以展开分析的一些技术点
               
             
           </h1>
@@ -216,8 +219,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-02-23T00:27:31+08:00" content="2016-02-23">
-              2016-02-23
+            <time itemprop="dateCreated" datetime="2016-03-18T11:28:24+08:00" content="2016-03-18">
+              2016-03-18
             </time>
           </span>
 
@@ -230,8 +233,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/闲扯/" itemprop="url" rel="index">
-                    <span itemprop="name">闲扯</span>
+                  <a href="/categories/待办/" itemprop="url" rel="index">
+                    <span itemprop="name">待办</span>
                   </a>
                 </span>
 
@@ -262,7 +265,10 @@
       
 
       
-        <p>最近一直有写博客的想法，虽一时兴起用hexo搭了个框架，然一直拖到现在才开始，惭愧，之前在csdn上有一个，但并没有坚持下来。用马克飞象写了一些东西，但终究是闭门造车，因为不示与人前，总会有些马马虎虎。用博客来做分享，是非常好总结方式，希望自己坚持下去。</p>
+        <ol>
+<li>IdleHandler的原理</li>
+<li>java garbage collector 对 WeakReference，SoftReference的处理</li>
+</ol>
 
       
     </div>
@@ -275,24 +281,18 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/闲扯/" rel="tag">#闲扯</a>
-          
-        </div>
-      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2016/03/15/德莱弗斯技能学习模型/" rel="next" title="德莱弗斯技能学习模型">
+                <i class="fa fa-chevron-left"></i> 德莱弗斯技能学习模型
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/14/Bound-Services/" rel="prev" title="android绑定service">
-                android绑定service <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -360,7 +360,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-count">4</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -368,7 +368,7 @@
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -377,7 +377,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

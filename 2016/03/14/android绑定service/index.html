@@ -60,10 +60,10 @@
 <meta name="description" content="Bound Services这篇关于绑定service的guide文档原文翻译网上有很多，增加一些需要注意的部分,部分代码在(我的github项目 leakcanary增加悬浮控制窗)，此处的客户端概念是service绑定的系统组件，例如activity service content provider(broadcast receiver不能绑定service)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="android绑定service">
-<meta property="og:url" content="http://yoursite.com/2016/03/14/Bound-Services/index.html">
+<meta property="og:url" content="http://yoursite.com/2016/03/14/android绑定service/index.html">
 <meta property="og:site_name" content="Mr.Icefox in coding...">
 <meta property="og:description" content="Bound Services这篇关于绑定service的guide文档原文翻译网上有很多，增加一些需要注意的部分,部分代码在(我的github项目 leakcanary增加悬浮控制窗)，此处的客户端概念是service绑定的系统组件，例如activity service content provider(broadcast receiver不能绑定service)">
-<meta property="og:updated_time" content="2016-03-15T09:37:24.584Z">
+<meta property="og:updated_time" content="2016-03-18T09:49:51.283Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="android绑定service">
 <meta name="twitter:description" content="Bound Services这篇关于绑定service的guide文档原文翻译网上有很多，增加一些需要注意的部分,部分代码在(我的github项目 leakcanary增加悬浮控制窗)，此处的客户端概念是service绑定的系统组件，例如activity service content provider(broadcast receiver不能绑定service)">
@@ -264,7 +264,8 @@
       
         <p><a href="http://developer.android.com/guide/components/bound-services.html" target="_blank" rel="external">Bound Services</a>这篇关于绑定service的guide文档原文翻译网上有很多，增加一些需要注意的部分,部分代码在(我的github项目 <a href="https://github.com/MrIceFox/leakcanary" target="_blank" rel="external">leakcanary增加悬浮控制窗</a>)，此处的客户端概念是service绑定的系统组件，例如<code>activity service content provider</code>(<code>broadcast receiver</code>不能绑定<code>service</code>)<br><a id="more"></a></p>
 <h4 id="onBind"><a href="#onBind" class="headerlink" title="onBind"></a>onBind</h4><p>多个客户端同时绑定<code>service</code>时，方法<code>onBind()</code>将只调用一次，在首个客户端绑定之后的客户端得到的<code>IBinder</code>其实是一个，我曾经使用<code>Messenger</code>和重写<code>Binder</code>两种方式绑定同一个<code>service</code>，依据<code>Intent</code>来区分，结果发现在<code>Messenger</code>绑定成功之后另一个客户端得到的IBinder任然是上一个，抛<code>ClassCastException</code> 方法<code>public IBinder onBind(Intent intent)</code>参数<code>intent</code>可以携带绑定信息</p>
-<h4 id="重写Binder"><a href="#重写Binder" class="headerlink" title="重写Binder"></a>重写Binder</h4><p>如果<code>service</code>是app私有的(不为其他app提供服务),并且是和客户端运行于同一进程，重写<code>Binder</code>是优先考虑的绑定方式，例如：<br>        public class ContractBinder extends Binder {<br>            public AssistiveGuardService getService() {<br>            return AssistiveGuardService.this;<br>            }<br>        }<br>需要注意的是，在使用<code>IntentService</code>作为客户端去绑定<code>service</code>的时候，可能在<code>ServiceConnection</code>还未建立的时候客户端就执行完毕了，而客户端需要在连接建立之后获取<code>service</code>的一些信息，这样就需要一些线程等待操作。</p>
+<h4 id="重写Binder"><a href="#重写Binder" class="headerlink" title="重写Binder"></a>重写Binder</h4><p>如果<code>service</code>是app私有的(不为其他app提供服务),并且是和客户端运行于同一进程，重写<code>Binder</code>是优先考虑的绑定方式，例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public class ContractBinder extends Binder &#123;&#10;&#9;public AssistiveGuardService getService() &#123;&#9;&#10;&#9;&#9;return AssistiveGuardService.this;&#10;&#9;&#125;&#10;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>需要注意的是，在使用<code>IntentService</code>作为客户端去绑定<code>service</code>的时候，可能在<code>ServiceConnection</code>还未建立的时候客户端就执行完毕了，而客户端需要在连接建立之后获取<code>service</code>的一些信息，这样就需要一些线程等待操作。</p>
 <h4 id="Messenger"><a href="#Messenger" class="headerlink" title="Messenger"></a>Messenger</h4><p>通过<code>Messenger</code>绑定<code>service</code>是最简单的IPC方式，如果<code>service</code>和客户端处于不同进程，优先考虑，代码参考<br><em>\samples\android-23\legacy\ApiDemos\src\com\example\android\apis\app\MessengerService.java</em><br>需要注意的是<code>message</code>携带的参数<code>message.obj</code>此处<code>obj</code>需要实现接口<code>Parcelable</code></p>
 <h4 id="AIDL"><a href="#AIDL" class="headerlink" title="AIDL"></a>AIDL</h4><p>AIDL主要使用在不同app之间<code>service</code>和客户端的IPC，和<code>Messenger</code>的主要区别在于<code>Messenger</code>是在一个线程中使用队列依次处理客户端请求，而AIDL则可以同时处理多个客户端请求，需要处理好多线程问题</p>
 <h4 id="service线程"><a href="#service线程" class="headerlink" title="service线程"></a>service线程</h4><p><code>service</code>处于单独进程的话，默认会在此进程再开启一个主线程运行<code>service</code></p>
@@ -293,7 +294,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/02/23/android绑定service/" rel="next" title="开始写博客">
+              <a href="/2016/02/23/开始写博客/" rel="next" title="开始写博客">
                 <i class="fa fa-chevron-left"></i> 开始写博客
               </a>
             
@@ -371,7 +372,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-count">4</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -379,7 +380,7 @@
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -388,7 +389,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
