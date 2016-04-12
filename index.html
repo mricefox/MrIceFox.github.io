@@ -92,6 +92,16 @@
 
 
 
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?7d5bffe9276e683ad6859a42198b8b9b";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
 
 
 
@@ -206,8 +216,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/03/28/Android-SQLite-性能优化/" itemprop="url">
-                  Android SQLite 性能优化
+                <a class="post-title-link" href="/2016/04/12/android-open-source-hawk-analysis/" itemprop="url">
+                  Android加密存储开源库Hawk源码分析
                 </a>
               
             
@@ -220,33 +230,21 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-28T17:42:40+08:00" content="2016-03-28">
-              2016-03-28
+            <time itemprop="dateCreated" datetime="2016-04-12T18:16:51+08:00" content="2016-04-12">
+              2016-04-12
             </time>
           </span>
 
           
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/12/android-open-source-hawk-analysis/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/12/android-open-source-hawk-analysis/" itemprop="commentsCount"></span>
+                </a>
               </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android数据库/" itemprop="url" rel="index">
-                    <span itemprop="name">Android数据库</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
             
           
 
@@ -267,9 +265,9 @@
 
       
         
-          <p><img src="/images/sqlite370_banner.gif" alt=""><br>在android开发中遇到数据库需要并发访问的问题，这里通过源码分析<code>SQLite</code>，怎样高效使用<code>SQLite</code><br>
+          <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p><a href="https://github.com/orhanobut/hawk">Hawk</a>是一个安卓加密本地存储的开源项目，以key-value作为存储形式，提供了put/get等简单的API，通常作为项目中的一个基础库使用。最近关注本地存储，看了看它的源码，发现一些问题，也提了一些PR。在这里通过Hawk v1.23的源代码，结合使用，分析一下它的原理，提出一些使用的注意事项。<br>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/28/Android-SQLite-性能优化/#more" rel="contents">
+            <a class="btn" href="/2016/04/12/android-open-source-hawk-analysis/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -316,7 +314,124 @@
             
               
                 
-                <a class="post-title-link" href="/2016/03/18/可以展开分析的一些技术点/" itemprop="url">
+                <a class="post-title-link" href="/2016/03/28/android-sqlite-optimize/" itemprop="url">
+                  Android SQLite 性能优化
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-28T17:42:40+08:00" content="2016-03-28">
+              2016-03-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">Android数据库</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/28/android-sqlite-optimize/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/28/android-sqlite-optimize/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><img src="/images/sqlite370_banner.gif" alt=""><br>在android开发中遇到数据库需要并发访问的问题，这里通过源码分析<code>SQLite</code>，怎样高效使用<code>SQLite</code><br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/03/28/android-sqlite-optimize/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/03/18/to-be-expand/" itemprop="url">
                   可以展开分析的一些技术点
                 </a>
               
@@ -357,6 +472,13 @@
           
 
           
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/18/to-be-expand/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/18/to-be-expand/" itemprop="commentsCount"></span>
+                </a>
+              </span>
             
           
 
@@ -428,7 +550,7 @@
             
               
                 
-                <a class="post-title-link" href="/2016/03/18/LeakCanary源码分析/" itemprop="url">
+                <a class="post-title-link" href="/2016/03/18/leakcanary-source-code-analysis/" itemprop="url">
                   LeakCanary源码分析
                 </a>
               
@@ -470,6 +592,13 @@
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/18/leakcanary-source-code-analysis/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/18/leakcanary-source-code-analysis/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -491,7 +620,7 @@
         
           <p><img src="/images/leakcanary_icon_512.png" alt=""><br><a href="https://github.com/square/leakcanary" title="https://github.com/square/leakcanary">LeakCanary</a><br>LeakCanary是一个检测内存泄露的工具，主要实现是通过生成并分析hprof文件，来达到检测对象是否被及时回收的目的。<br>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/18/LeakCanary源码分析/#more" rel="contents">
+            <a class="btn" href="/2016/03/18/leakcanary-source-code-analysis/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -538,7 +667,7 @@
             
               
                 
-                <a class="post-title-link" href="/2016/03/15/德莱弗斯技能学习模型/" itemprop="url">
+                <a class="post-title-link" href="/2016/03/15/dreyfus-model-of-skill-acquisition/" itemprop="url">
                   德莱弗斯技能学习模型
                 </a>
               
@@ -580,6 +709,13 @@
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/15/dreyfus-model-of-skill-acquisition/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/15/dreyfus-model-of-skill-acquisition/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -601,7 +737,7 @@
         
           <p>wiki:<br><a href="https://en.wikipedia.org/wiki/Dreyfus_model_of_skill_acquisition">Dreyfus model of skill acquisition</a><br>这个模型将技能水准分为5个等级，对评估自己的技能，驱动自己进入更高水准，有一些帮助吧<br>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/15/德莱弗斯技能学习模型/#more" rel="contents">
+            <a class="btn" href="/2016/03/15/dreyfus-model-of-skill-acquisition/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -648,7 +784,7 @@
             
               
                 
-                <a class="post-title-link" href="/2016/03/14/android绑定service/" itemprop="url">
+                <a class="post-title-link" href="/2016/03/14/android-bind-service/" itemprop="url">
                   android绑定service
                 </a>
               
@@ -690,6 +826,13 @@
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/14/android-bind-service/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/14/android-bind-service/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -711,7 +854,7 @@
         
           <p><a href="http://developer.android.com/guide/components/bound-services.html">Bound Services</a>这篇关于绑定service的guide文档原文翻译网上有很多，增加一些需要注意的部分,部分代码在(我的github项目 <a href="https://github.com/MrIceFox/leakcanary">leakcanary增加悬浮控制窗</a>)，此处的客户端概念是service绑定的系统组件，例如<code>activity service content provider</code>(<code>broadcast receiver</code>不能绑定<code>service</code>)<br>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/14/android绑定service/#more" rel="contents">
+            <a class="btn" href="/2016/03/14/android-bind-service/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -758,7 +901,7 @@
             
               
                 
-                <a class="post-title-link" href="/2016/02/23/开始写博客/" itemprop="url">
+                <a class="post-title-link" href="/2016/02/23/begin-writing/" itemprop="url">
                   开始写博客
                 </a>
               
@@ -799,6 +942,13 @@
           
 
           
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/02/23/begin-writing/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/23/begin-writing/" itemprop="commentsCount"></span>
+                </a>
+              </span>
             
           
 
@@ -886,7 +1036,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-count">7</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -903,7 +1053,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1028,9 +1178,28 @@
 
   
 
+  
+    
+  
 
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"mricefox"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
 
   
+    
+  
+
+
 
 
 

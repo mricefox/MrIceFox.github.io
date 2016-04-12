@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="闲扯," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -57,16 +57,22 @@
 
 
 
-<meta name="description" content="最近一直有写博客的想法，虽一时兴起用hexo搭了个框架，然一直拖到现在才开始，惭愧，之前在csdn上有一个，但并没有坚持下来。用马克飞象写了一些东西，但终究是闭门造车，因为不示与人前，总会有些马马虎虎。用博客来做分享，是非常好总结方式，希望自己坚持下去。">
+<meta name="description" content="IdleHandler的原理
+java garbage collector 对 WeakReference，SoftReference的处理
+Toast原理">
 <meta property="og:type" content="article">
-<meta property="og:title" content="开始写博客">
-<meta property="og:url" content="http://yoursite.com/2016/02/23/开始写博客/index.html">
+<meta property="og:title" content="可以展开分析的一些技术点">
+<meta property="og:url" content="http://yoursite.com/2016/03/18/to-be-expand/index.html">
 <meta property="og:site_name" content="Mr.Icefox in coding...">
-<meta property="og:description" content="最近一直有写博客的想法，虽一时兴起用hexo搭了个框架，然一直拖到现在才开始，惭愧，之前在csdn上有一个，但并没有坚持下来。用马克飞象写了一些东西，但终究是闭门造车，因为不示与人前，总会有些马马虎虎。用博客来做分享，是非常好总结方式，希望自己坚持下去。">
-<meta property="og:updated_time" content="2016-03-14T10:14:58.665Z">
+<meta property="og:description" content="IdleHandler的原理
+java garbage collector 对 WeakReference，SoftReference的处理
+Toast原理">
+<meta property="og:updated_time" content="2016-03-21T06:17:14.185Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="开始写博客">
-<meta name="twitter:description" content="最近一直有写博客的想法，虽一时兴起用hexo搭了个框架，然一直拖到现在才开始，惭愧，之前在csdn上有一个，但并没有坚持下来。用马克飞象写了一些东西，但终究是闭门造车，因为不示与人前，总会有些马马虎虎。用博客来做分享，是非常好总结方式，希望自己坚持下去。">
+<meta name="twitter:title" content="可以展开分析的一些技术点">
+<meta name="twitter:description" content="IdleHandler的原理
+java garbage collector 对 WeakReference，SoftReference的处理
+Toast原理">
 
 
 
@@ -84,7 +90,7 @@
   };
 </script>
 
-  <title> 开始写博客 | Mr.Icefox in coding... </title>
+  <title> 可以展开分析的一些技术点 | Mr.Icefox in coding... </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -92,6 +98,16 @@
   
 
 
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?7d5bffe9276e683ad6859a42198b8b9b";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
 
 
 
@@ -204,7 +220,7 @@
             
             
               
-                开始写博客
+                可以展开分析的一些技术点
               
             
           </h1>
@@ -216,8 +232,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-02-23T00:27:31+08:00" content="2016-02-23">
-              2016-02-23
+            <time itemprop="dateCreated" datetime="2016-03-18T11:28:24+08:00" content="2016-03-18">
+              2016-03-18
             </time>
           </span>
 
@@ -230,8 +246,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/闲扯/" itemprop="url" rel="index">
-                    <span itemprop="name">闲扯</span>
+                  <a href="/categories/待办/" itemprop="url" rel="index">
+                    <span itemprop="name">待办</span>
                   </a>
                 </span>
 
@@ -243,6 +259,13 @@
           
 
           
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/18/to-be-expand/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/18/to-be-expand/" itemprop="commentsCount"></span>
+                </a>
+              </span>
             
           
 
@@ -262,7 +285,11 @@
       
 
       
-        <p>最近一直有写博客的想法，虽一时兴起用hexo搭了个框架，然一直拖到现在才开始，惭愧，之前在csdn上有一个，但并没有坚持下来。用马克飞象写了一些东西，但终究是闭门造车，因为不示与人前，总会有些马马虎虎。用博客来做分享，是非常好总结方式，希望自己坚持下去。</p>
+        <ol>
+<li>IdleHandler的原理</li>
+<li>java garbage collector 对 WeakReference，SoftReference的处理</li>
+<li>Toast原理</li>
+</ol>
 
       
     </div>
@@ -275,23 +302,21 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/闲扯/" rel="tag">#闲扯</a>
-          
-        </div>
-      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2016/03/18/leakcanary-source-code-analysis/" rel="next" title="LeakCanary源码分析">
+                <i class="fa fa-chevron-left"></i> LeakCanary源码分析
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/03/14/android绑定service/" rel="prev" title="android绑定service">
-                android绑定service <i class="fa fa-chevron-right"></i>
+              <a href="/2016/03/28/android-sqlite-optimize/" rel="prev" title="Android SQLite 性能优化">
+                Android SQLite 性能优化 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -317,6 +342,10 @@
 
           
   <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/03/18/to-be-expand/"
+           data-title="可以展开分析的一些技术点" data-url="http://yoursite.com/2016/03/18/to-be-expand/">
+      </div>
     
   </div>
 
@@ -360,7 +389,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-count">7</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -377,7 +406,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -680,9 +709,28 @@
 
   
 
+  
+    
+  
 
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"mricefox"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
 
   
+    
+  
+
+
 
 
 

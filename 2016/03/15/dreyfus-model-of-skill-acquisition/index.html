@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Android service," />
+  <meta name="keywords" content="学习," />
 
 
 
@@ -57,16 +57,16 @@
 
 
 
-<meta name="description" content="Bound Services这篇关于绑定service的guide文档原文翻译网上有很多，增加一些需要注意的部分,部分代码在(我的github项目 leakcanary增加悬浮控制窗)，此处的客户端概念是service绑定的系统组件，例如activity service content provider(broadcast receiver不能绑定service)">
+<meta name="description" content="wiki:Dreyfus model of skill acquisition这个模型将技能水准分为5个等级，对评估自己的技能，驱动自己进入更高水准，有一些帮助吧">
 <meta property="og:type" content="article">
-<meta property="og:title" content="android绑定service">
-<meta property="og:url" content="http://yoursite.com/2016/03/14/android绑定service/index.html">
+<meta property="og:title" content="德莱弗斯技能学习模型">
+<meta property="og:url" content="http://yoursite.com/2016/03/15/dreyfus-model-of-skill-acquisition/index.html">
 <meta property="og:site_name" content="Mr.Icefox in coding...">
-<meta property="og:description" content="Bound Services这篇关于绑定service的guide文档原文翻译网上有很多，增加一些需要注意的部分,部分代码在(我的github项目 leakcanary增加悬浮控制窗)，此处的客户端概念是service绑定的系统组件，例如activity service content provider(broadcast receiver不能绑定service)">
-<meta property="og:updated_time" content="2016-03-18T09:49:51.283Z">
+<meta property="og:description" content="wiki:Dreyfus model of skill acquisition这个模型将技能水准分为5个等级，对评估自己的技能，驱动自己进入更高水准，有一些帮助吧">
+<meta property="og:updated_time" content="2016-03-16T03:02:39.374Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="android绑定service">
-<meta name="twitter:description" content="Bound Services这篇关于绑定service的guide文档原文翻译网上有很多，增加一些需要注意的部分,部分代码在(我的github项目 leakcanary增加悬浮控制窗)，此处的客户端概念是service绑定的系统组件，例如activity service content provider(broadcast receiver不能绑定service)">
+<meta name="twitter:title" content="德莱弗斯技能学习模型">
+<meta name="twitter:description" content="wiki:Dreyfus model of skill acquisition这个模型将技能水准分为5个等级，对评估自己的技能，驱动自己进入更高水准，有一些帮助吧">
 
 
 
@@ -84,7 +84,7 @@
   };
 </script>
 
-  <title> android绑定service | Mr.Icefox in coding... </title>
+  <title> 德莱弗斯技能学习模型 | Mr.Icefox in coding... </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -92,6 +92,16 @@
   
 
 
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?7d5bffe9276e683ad6859a42198b8b9b";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
 
 
 
@@ -204,7 +214,7 @@
             
             
               
-                android绑定service
+                德莱弗斯技能学习模型
               
             
           </h1>
@@ -216,8 +226,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-14T18:08:24+08:00" content="2016-03-14">
-              2016-03-14
+            <time itemprop="dateCreated" datetime="2016-03-15T23:21:22+08:00" content="2016-03-15">
+              2016-03-15
             </time>
           </span>
 
@@ -230,8 +240,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android-Service/" itemprop="url" rel="index">
-                    <span itemprop="name">Android Service</span>
+                  <a href="/categories/闲扯/" itemprop="url" rel="index">
+                    <span itemprop="name">闲扯</span>
                   </a>
                 </span>
 
@@ -243,6 +253,13 @@
           
 
           
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/15/dreyfus-model-of-skill-acquisition/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/15/dreyfus-model-of-skill-acquisition/" itemprop="commentsCount"></span>
+                </a>
+              </span>
             
           
 
@@ -262,15 +279,28 @@
       
 
       
-        <p><a href="http://developer.android.com/guide/components/bound-services.html" target="_blank" rel="external">Bound Services</a>这篇关于绑定service的guide文档原文翻译网上有很多，增加一些需要注意的部分,部分代码在(我的github项目 <a href="https://github.com/MrIceFox/leakcanary" target="_blank" rel="external">leakcanary增加悬浮控制窗</a>)，此处的客户端概念是service绑定的系统组件，例如<code>activity service content provider</code>(<code>broadcast receiver</code>不能绑定<code>service</code>)<br><a id="more"></a></p>
-<h4 id="onBind"><a href="#onBind" class="headerlink" title="onBind"></a>onBind</h4><p>多个客户端同时绑定<code>service</code>时，方法<code>onBind()</code>将只调用一次，在首个客户端绑定之后的客户端得到的<code>IBinder</code>其实是一个，我曾经使用<code>Messenger</code>和重写<code>Binder</code>两种方式绑定同一个<code>service</code>，依据<code>Intent</code>来区分，结果发现在<code>Messenger</code>绑定成功之后另一个客户端得到的IBinder任然是上一个，抛<code>ClassCastException</code> 方法<code>public IBinder onBind(Intent intent)</code>参数<code>intent</code>可以携带绑定信息</p>
-<h4 id="重写Binder"><a href="#重写Binder" class="headerlink" title="重写Binder"></a>重写Binder</h4><p>如果<code>service</code>是app私有的(不为其他app提供服务),并且是和客户端运行于同一进程，重写<code>Binder</code>是优先考虑的绑定方式，例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public class ContractBinder extends Binder &#123;&#10;&#9;public AssistiveGuardService getService() &#123;&#9;&#10;&#9;&#9;return AssistiveGuardService.this;&#10;&#9;&#125;&#10;&#125;</span><br></pre></td></tr></table></figure></p>
-<p>需要注意的是，在使用<code>IntentService</code>作为客户端去绑定<code>service</code>的时候，可能在<code>ServiceConnection</code>还未建立的时候客户端就执行完毕了，而客户端需要在连接建立之后获取<code>service</code>的一些信息，这样就需要一些线程等待操作。</p>
-<h4 id="Messenger"><a href="#Messenger" class="headerlink" title="Messenger"></a>Messenger</h4><p>通过<code>Messenger</code>绑定<code>service</code>是最简单的IPC方式，如果<code>service</code>和客户端处于不同进程，优先考虑，代码参考<br><em>\samples\android-23\legacy\ApiDemos\src\com\example\android\apis\app\MessengerService.java</em><br>需要注意的是<code>message</code>携带的参数<code>message.obj</code>此处<code>obj</code>需要实现接口<code>Parcelable</code></p>
-<h4 id="AIDL"><a href="#AIDL" class="headerlink" title="AIDL"></a>AIDL</h4><p>AIDL主要使用在不同app之间<code>service</code>和客户端的IPC，和<code>Messenger</code>的主要区别在于<code>Messenger</code>是在一个线程中使用队列依次处理客户端请求，而AIDL则可以同时处理多个客户端请求，需要处理好多线程问题</p>
-<h4 id="service线程"><a href="#service线程" class="headerlink" title="service线程"></a>service线程</h4><p><code>service</code>处于单独进程的话，默认会在此进程再开启一个主线程运行<code>service</code></p>
-<h4 id="activity绑定"><a href="#activity绑定" class="headerlink" title="activity绑定"></a>activity绑定</h4><p>使用<code>activity</code>作为客户端绑定<code>service</code>的时候,如果和<code>service</code>的通信只需要在<code>activity</code>可见时发生，绑定和解绑操作放在onStart()和onStop()中，而如果需要在后台依然保持通信，绑定解绑操作适合放在onCreate()和onDestroy()中</p>
-<h4 id="内存问题"><a href="#内存问题" class="headerlink" title="内存问题"></a>内存问题</h4><p>如果你需要将你的app拆分为多个进程，尽量只在一个进程中渲染UI，而在其他进程中避免渲染任何UI，因为这将迅速增加此进程的内存消耗，特别是读取bitmap和其他资源的时候，当UI渲染之后想减少内存使用将变得很困难。参考:<br><a href="http://developer.android.com/training/articles/memory.html#MultipleProcesses" target="_blank" rel="external">http://developer.android.com/training/articles/memory.html#MultipleProcesses</a></p>
+        <p>wiki:<br><a href="https://en.wikipedia.org/wiki/Dreyfus_model_of_skill_acquisition" target="_blank" rel="external">Dreyfus model of skill acquisition</a><br>这个模型将技能水准分为5个等级，对评估自己的技能，驱动自己进入更高水准，有一些帮助吧<br><a id="more"></a></p>
+<h4 id="1-Novice"><a href="#1-Novice" class="headerlink" title="1. Novice"></a>1. Novice</h4><blockquote>
+<p>新手，严格遵循学会的法则或者规划，没有自己的推断。</p>
+</blockquote>
+<p>刚学会，只能照着说明书去做。</p>
+<h4 id="2-Advanced-beginner"><a href="#2-Advanced-beginner" class="headerlink" title="2. Advanced beginner"></a>2. Advanced beginner</h4><blockquote>
+<p>初学者，有一定的情景感知，各方面工作用同等的优先级区分对待。</p>
+</blockquote>
+<p>会在适当情形下想到，该用这个了。</p>
+<h4 id="3-Competent"><a href="#3-Competent" class="headerlink" title="3. Competent"></a>3. Competent</h4><blockquote>
+<p>能够胜任，累计了一定的活动和信息，有一些关于目标的实现思路，设计规划，构想实现路径。</p>
+</blockquote>
+<p>多次重复下终于有了一点自己的想法。</p>
+<h4 id="4-Proficient"><a href="#4-Proficient" class="headerlink" title="4. Proficient"></a>4. Proficient</h4><blockquote>
+<p>精通，全局视野，对各方面工作可以区分优先级，从通常模式中可以感觉到偏差，采用适应当前情形的准则作为指导</p>
+</blockquote>
+<p>玩腻了简单重复，开始注重细节。</p>
+<h4 id="5-Expert"><a href="#5-Expert" class="headerlink" title="5. Expert"></a>5. Expert</h4><blockquote>
+<p>专家，不依赖于规则，指南和准则，本能而默契地抓住问题的核心，有预见性，在新情形或者问题下用分析的方法解决。</p>
+</blockquote>
+<p>抛弃常规手段，抓住核心有预见性的使用自己的方法</p>
+<h3 id="一点见解"><a href="#一点见解" class="headerlink" title="一点见解"></a>一点见解</h3><p>学东西的过程，大多是按着上面5个阶段进行。在新手阶段感到不适感很强，不会的很多，但是又急于跳到下一个阶段，这个阶段多一点耐心，降低一些期望，有助于快速入门。而到了熟练掌握这个阶段，不适感没了，大脑喜欢重复的工作，这个阶段多一点好奇心，提高一些期望，让自己不适感多一些，跳出重复劳动的圈子。再高一点的阶段，多总结，多挖掘细节，总结建立自己的体系。</p>
 
       
     </div>
@@ -285,7 +315,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Android-service/" rel="tag">#Android service</a>
+            <a href="/tags/学习/" rel="tag">#学习</a>
           
         </div>
       
@@ -294,16 +324,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/02/23/开始写博客/" rel="next" title="开始写博客">
-                <i class="fa fa-chevron-left"></i> 开始写博客
+              <a href="/2016/03/14/android-bind-service/" rel="next" title="android绑定service">
+                <i class="fa fa-chevron-left"></i> android绑定service
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/03/15/德莱弗斯技能学习模型/" rel="prev" title="德莱弗斯技能学习模型">
-                德莱弗斯技能学习模型 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/03/18/leakcanary-source-code-analysis/" rel="prev" title="LeakCanary源码分析">
+                LeakCanary源码分析 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -329,6 +359,10 @@
 
           
   <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/03/15/dreyfus-model-of-skill-acquisition/"
+           data-title="德莱弗斯技能学习模型" data-url="http://yoursite.com/2016/03/15/dreyfus-model-of-skill-acquisition/">
+      </div>
     
   </div>
 
@@ -372,7 +406,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-count">7</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -389,7 +423,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -423,7 +457,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#onBind"><span class="nav-number">1.</span> <span class="nav-text">onBind</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重写Binder"><span class="nav-number">2.</span> <span class="nav-text">重写Binder</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Messenger"><span class="nav-number">3.</span> <span class="nav-text">Messenger</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AIDL"><span class="nav-number">4.</span> <span class="nav-text">AIDL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#service线程"><span class="nav-number">5.</span> <span class="nav-text">service线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#activity绑定"><span class="nav-number">6.</span> <span class="nav-text">activity绑定</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内存问题"><span class="nav-number">7.</span> <span class="nav-text">内存问题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Novice"><span class="nav-number">1.</span> <span class="nav-text">1. Novice</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Advanced-beginner"><span class="nav-number">2.</span> <span class="nav-text">2. Advanced beginner</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Competent"><span class="nav-number">3.</span> <span class="nav-text">3. Competent</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-Proficient"><span class="nav-number">4.</span> <span class="nav-text">4. Proficient</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-Expert"><span class="nav-number">5.</span> <span class="nav-text">5. Expert</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一点见解"><span class="nav-number"></span> <span class="nav-text">一点见解</span></a></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
@@ -692,9 +726,28 @@
 
   
 
+  
+    
+  
 
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"mricefox"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
 
   
+    
+  
+
+
 
 
 
