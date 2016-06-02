@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="学习," />
+  <meta name="keywords" content="android 编译 集成," />
 
 
 
@@ -57,16 +57,17 @@
 
 
 
-<meta name="description" content="wiki:Dreyfus model of skill acquisition这个模型将技能水准分为5个等级，对评估自己的技能，驱动自己进入更高水准，有一些帮助吧">
+<meta name="description" content="Android使用gradle作为编译脚本，之前对gradle也是一知半解。最近在做app的持续集成，工具为Jenkins，由于机器有windows和mac两种，为了避免编写bash和shell脚本，使用了gradle来实现编译，打包，上传等功能，这里记录一下这个过程所遇到的一些坑和一些技术点。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="德莱弗斯技能学习模型">
-<meta property="og:url" content="http://yoursite.com/2016/03/15/dreyfus-model-of-skill-acquisition/index.html">
+<meta property="og:title" content="Android Gradle构建和Jenkins持续集成">
+<meta property="og:url" content="http://yoursite.com/2016/06/02/android-gradle-build-jenkins-continuous-integration/index.html">
 <meta property="og:site_name" content="Mr.Icefox in coding...">
-<meta property="og:description" content="wiki:Dreyfus model of skill acquisition这个模型将技能水准分为5个等级，对评估自己的技能，驱动自己进入更高水准，有一些帮助吧">
-<meta property="og:updated_time" content="2016-03-16T03:02:39.374Z">
+<meta property="og:description" content="Android使用gradle作为编译脚本，之前对gradle也是一知半解。最近在做app的持续集成，工具为Jenkins，由于机器有windows和mac两种，为了避免编写bash和shell脚本，使用了gradle来实现编译，打包，上传等功能，这里记录一下这个过程所遇到的一些坑和一些技术点。">
+<meta property="og:image" content="http://yoursite.com/images/jenkins_screenshot_1.png">
+<meta property="og:updated_time" content="2016-06-02T06:32:36.205Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="德莱弗斯技能学习模型">
-<meta name="twitter:description" content="wiki:Dreyfus model of skill acquisition这个模型将技能水准分为5个等级，对评估自己的技能，驱动自己进入更高水准，有一些帮助吧">
+<meta name="twitter:title" content="Android Gradle构建和Jenkins持续集成">
+<meta name="twitter:description" content="Android使用gradle作为编译脚本，之前对gradle也是一知半解。最近在做app的持续集成，工具为Jenkins，由于机器有windows和mac两种，为了避免编写bash和shell脚本，使用了gradle来实现编译，打包，上传等功能，这里记录一下这个过程所遇到的一些坑和一些技术点。">
 
 
 
@@ -84,7 +85,7 @@
   };
 </script>
 
-  <title> 德莱弗斯技能学习模型 | Mr.Icefox in coding... </title>
+  <title> Android Gradle构建和Jenkins持续集成 | Mr.Icefox in coding... </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -214,7 +215,7 @@
             
             
               
-                德莱弗斯技能学习模型
+                Android Gradle构建和Jenkins持续集成
               
             
           </h1>
@@ -226,8 +227,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-15T23:21:22+08:00" content="2016-03-15">
-              2016-03-15
+            <time itemprop="dateCreated" datetime="2016-06-02T14:30:13+08:00" content="2016-06-02">
+              2016-06-02
             </time>
           </span>
 
@@ -240,8 +241,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/闲扯/" itemprop="url" rel="index">
-                    <span itemprop="name">闲扯</span>
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
                   </a>
                 </span>
 
@@ -256,8 +257,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/15/dreyfus-model-of-skill-acquisition/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/15/dreyfus-model-of-skill-acquisition/" itemprop="commentsCount"></span>
+                <a href="/2016/06/02/android-gradle-build-jenkins-continuous-integration/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/02/android-gradle-build-jenkins-continuous-integration/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -267,7 +268,7 @@
 
           
           
-             <span id="/2016/03/15/dreyfus-model-of-skill-acquisition/" class="leancloud_visitors" data-flag-title="德莱弗斯技能学习模型">
+             <span id="/2016/06/02/android-gradle-build-jenkins-continuous-integration/" class="leancloud_visitors" data-flag-title="Android Gradle构建和Jenkins持续集成">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -288,28 +289,26 @@
       
 
       
-        <p>wiki:<br><a href="https://en.wikipedia.org/wiki/Dreyfus_model_of_skill_acquisition" target="_blank" rel="external">Dreyfus model of skill acquisition</a><br>这个模型将技能水准分为5个等级，对评估自己的技能，驱动自己进入更高水准，有一些帮助吧<br><a id="more"></a></p>
-<h4 id="1-Novice"><a href="#1-Novice" class="headerlink" title="1. Novice"></a>1. Novice</h4><blockquote>
-<p>新手，严格遵循学会的法则或者规划，没有自己的推断。</p>
-</blockquote>
-<p>刚学会，只能照着说明书去做。</p>
-<h4 id="2-Advanced-beginner"><a href="#2-Advanced-beginner" class="headerlink" title="2. Advanced beginner"></a>2. Advanced beginner</h4><blockquote>
-<p>初学者，有一定的情景感知，各方面工作用同等的优先级区分对待。</p>
-</blockquote>
-<p>会在适当情形下想到，该用这个了。</p>
-<h4 id="3-Competent"><a href="#3-Competent" class="headerlink" title="3. Competent"></a>3. Competent</h4><blockquote>
-<p>能够胜任，累计了一定的活动和信息，有一些关于目标的实现思路，设计规划，构想实现路径。</p>
-</blockquote>
-<p>多次重复下终于有了一点自己的想法。</p>
-<h4 id="4-Proficient"><a href="#4-Proficient" class="headerlink" title="4. Proficient"></a>4. Proficient</h4><blockquote>
-<p>精通，全局视野，对各方面工作可以区分优先级，从通常模式中可以感觉到偏差，采用适应当前情形的准则作为指导</p>
-</blockquote>
-<p>玩腻了简单重复，开始注重细节。</p>
-<h4 id="5-Expert"><a href="#5-Expert" class="headerlink" title="5. Expert"></a>5. Expert</h4><blockquote>
-<p>专家，不依赖于规则，指南和准则，本能而默契地抓住问题的核心，有预见性，在新情形或者问题下用分析的方法解决。</p>
-</blockquote>
-<p>抛弃常规手段，抓住核心有预见性的使用自己的方法</p>
-<h3 id="一点见解"><a href="#一点见解" class="headerlink" title="一点见解"></a>一点见解</h3><p>学东西的过程，大多是按着上面5个阶段进行。在新手阶段感到不适感很强，不会的很多，但是又急于跳到下一个阶段，这个阶段多一点耐心，降低一些期望，有助于快速入门。而到了熟练掌握这个阶段，不适感没了，大脑喜欢重复的工作，这个阶段多一点好奇心，提高一些期望，让自己不适感多一些，跳出重复劳动的圈子。再高一点的阶段，多总结，多挖掘细节，总结建立自己的体系。</p>
+        <p>Android使用gradle作为编译脚本，之前对gradle也是一知半解。最近在做app的持续集成，工具为Jenkins，由于机器有windows和mac两种，为了避免编写bash和shell脚本，使用了gradle来实现编译，打包，上传等功能，这里记录一下这个过程所遇到的一些坑和一些技术点。<br><a id="more"></a></p>
+<h1 id="Gradle编译"><a href="#Gradle编译" class="headerlink" title="Gradle编译"></a>Gradle编译</h1><h2 id="Groovy"><a href="#Groovy" class="headerlink" title="Groovy"></a>Groovy</h2><p>Gradle是一种使用Groovy作为语言的编译脚本，Groovy语言构建在Java语言之上，可以直接使用Java语法来进行编码，新增了许多特性，能使用较少代码实现功能，下面的脚本也使用Groovy编写，在Android Studio-&gt;Tools-&gt;Groovy Console中可以编写Groovy代码。关于groovy的语法可以看这篇文章<a href="http://www.ibm.com/developerworks/cn/education/java/j-groovy/j-groovy.html" title="精通 Groovy" target="_blank" rel="external">精通 Groovy</a></p>
+<h2 id="Gradle构建过程"><a href="#Gradle构建过程" class="headerlink" title="Gradle构建过程"></a>Gradle构建过程</h2><p>通常app由几个module构成，每个module单独有一个build.gradle文件，他们被当做独立的project，工程根目录也有一个单独的build.gradle文件，被当做root project，当我们执行gradle build命令时，gradle 将会在所有sub project和root project中寻找名为’build’的task去执行。<br>但是这里需要在打包之后执行自定义task，关于执行task的顺序举个例子<br>这里我新建一个含有了三个sub module 的工程，名称分别为<code>androidlibrary</code> <code>app</code> <code>loclibrary</code> ，互相依赖关系如下<br><code>app</code>-&gt;<code>androidlibrary</code>-&gt;<code>loclibrary</code><br>在每个module包括root module的build.gradle中添加task名为work，例如app中的是这样<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">task work &#60;&#60; &#123;&#10;    println &#39;--app:work--&#39;//&#27599;&#20010;task&#25171;&#21360;&#33258;&#24049;&#30340;&#21517;&#31216;+&#65306;work&#10;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在Terminal中执行gradlew.bat work,结果如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:work&#10;--root:work--&#10;:androidlibrary:work&#10;--androidlibrary:work--&#10;:app:work&#10;--app:work--&#10;:loclibrary:work&#10;--loclibrary:work--</span><br></pre></td></tr></table></figure></p>
+<p>也就是说这里的执行顺序和工程之间的依赖没有关系,所以当我们需要按照顺序执行task的时候，主要使用依赖也就是dependsOn(当然gradle还有一些可以指定在task最后执行某些动作的方法)</p>
+<p>task作为gradle构建的基础单位，通常通过自定义task并且为其添加依赖，这里例如我需要在生成apk之后执行一些附加动作，自定义了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">task dist(dependsOn: &#39;assembleRelease&#39;)&#60;&#60;&#123;&#10;//&#19978;&#20256;apk&#21040;&#26381;&#21153;&#22120;&#10;&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>&lt;&lt;</code>符号在这里等同于doLast 这个地方为了保证<code>dist</code>在<code>assembleRelease</code>生成apk之后执行。这里<code>assemble</code>与<code>buildTypes</code>里的类型结合可以生成不同类型的apk，例如<code>assembleDebug</code><br>在上传apk之前，需要将默认生成的apk重新命名，在app module的build.gradle中添加代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">buildTypes &#123;&#10;&#9;release &#123;&#10;&#9;&#9;...&#10;&#9;&#125;&#10;&#9;debug &#123;&#10;&#9;&#9;...&#10;&#9;&#125;&#10;&#9;applicationVariants.all &#123; variant -&#62;&#10;            renameApk(variant)&#10;        &#125;&#10;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后定义一个重命名apk的方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">def renameApk(variant) &#123;&#10;    if (variant.name == android.buildTypes.release.name) &#123;&#10;        variant.outputs.each &#123; output -&#62;&#10;            if (output.zipAlign) &#123;&#10;                def file = output.outputFile&#10;                def fileName = &#39;New_apk&#39;&#10;                output.outputFile = new File(file.parent, fileName)&#10;            &#125;&#10;//&#21629;&#21517;&#23545;&#40784;&#20043;&#21069;&#30340;apk&#10;//            def file = output.packageApplication.outputFile&#10;//            def fileName = &#34;tmp.apk&#34;&#10;//            output.packageApplication.outputFile = new File(file.parent, fileName)&#10;        &#125;&#10;    &#125; else if (variant.name == android.buildTypes.debug.name) &#123;&#10;        variant.outputs.each &#123; output -&#62;&#10;            if (output.zipAlign) &#123;&#10;                def file = output.outputFile&#10;                def fileName = &#39;New_apk&#39;&#10;                output.outputFile = new File(file.parent, fileName)&#10;            &#125;&#10;        &#125;&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>New_apk</code>可以更换为你想要的apk名称，但是不建议在这里打上时分秒的时间戳，因为当我们在AS上run一次之后，如果没有对代码修改只是修改编译脚本的话，clean之后再run gradle判断打包task up-to-date 会试图install上次run得到的apk，而此时生成的apk名称由于有时分秒的时间戳，和上一次已经不同，会导致apk找不到。<br>这里看一下上面代码的具体实现<br>在<code>Groovy</code>中，每个List或者数组都可以使用.each方式去遍历，然后将<code>Groovy</code>中的闭包(closure)，作为参数传入，去遍历执行闭包中的操作。<br>在生成apk之后使用ant上传到服务器，这里使用sftp方式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">repositories &#123;&#10;    mavenCentral()&#10;&#125;&#10;&#10;configurations &#123;&#10;    sshAntTask&#10;&#125;&#10;&#10;&#10;dependencies &#123;&#10;    sshAntTask &#39;org.apache.ant:ant-jsch:1.7.1&#39;, &#39;jsch:jsch:0.1.29&#39;&#10;&#125;&#10;&#10;//&#19978;&#20256;&#25991;&#20214;&#10;def uploadFile(userName, password, serverName, serverDir, localFile) &#123;&#10;    ant.taskdef(name: &#39;scp&#39;, classname: &#39;org.apache.tools.ant.taskdefs.optional.ssh.Scp&#39;,&#10;            classpath: configurations.sshAntTask.asPath)&#10;    //ant.scp &#21442;&#32771;http://ant.apache.org/manual/Tasks/scp.html&#10;    ant.scp(todir: &#34;$userName@$serverName:$serverDir&#34;,&#10;            password: password,&#10;            verbose: &#39;true&#39;,&#10;            file: localFile,&#10;            trust: &#39;true&#39;)&#10;    //&#19978;&#20256;&#25351;&#23450;&#25991;&#20214;&#22841;&#19979;&#30340;&#25991;&#20214;&#10;//            &#123;&#10;//        fileset(dir: &#34;$localDir&#34;) &#123;&#10;//            include(name: &#39;**/**&#39;)&#10;//        &#125;&#10;//    &#125;&#10;&#125;&#10;//&#19979;&#36733;&#25991;&#20214;&#10;def downloadFile(userName, password, serverName, serverFile, localDir) &#123;&#10;    ant.taskdef(name: &#39;scp&#39;, classname: &#39;org.apache.tools.ant.taskdefs.optional.ssh.Scp&#39;,&#10;            classpath: configurations.sshAntTask.asPath)&#10;    ant.scp(file: &#34;$userName:$password@$serverName:$serverFile&#34;,&#10;            todir: localDir,&#10;            password: password,&#10;            trust: &#39;true&#39;,&#10;            verbose: &#39;true&#39;)&#10;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>附上在工程根目录中的task dist<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">project(&#34;:$appProjectName&#34;) &#123;&#10;    task dist(dependsOn: &#39;assembleRelease&#39;) &#60;&#60; &#123;&#10;        def apkPath = &#34;$appProjectBuildDir&#34; + &#39;/outputs/apk/&#39; + apkName&#10;//        log(&#34;dist apkPath:$apkPath&#34;)&#10;        //&#25171;&#19978;&#26102;&#38388;&#25139;&#65292;&#36991;&#20813;&#35206;&#30422;&#26381;&#21153;&#22120;&#25991;&#20214;&#10;        def stampedPath = apkPath.substring(0, apkPath.lastIndexOf(&#39;.apk&#39;)) + &#39;_&#39; + new Date().format(&#39;yyMMddHHmm&#39;) + &#39;.apk&#39;&#10;        new File(apkPath).renameTo(stampedPath)&#10;        log(&#34;Start upload $stampedPath&#34;)&#10;        uploadFile(uploadUserName, uploadPwd,&#10;                uploadServerName, uploadServerDir, stampedPath)&#10;        rootProject.uploadApkName =  new File(stampedPath).getName()&#10;    &#125;&#10;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这样在Termin中输入gradlew.bat dist就会执行打包上传2个动作了<br>相关的密码常量定义在另外的gradle文件ext中，apply进来即可<br>最后附上一些比较有用的gradle命令行命令，如果配置了gradle环境变量，可以直接gradle -命令<br>gradle -m //‘dry run’ 空跑task，不去具体执行task内容我用于测试task的语法<br>gradle -u //不搜索根目录的setting.gradle 这在单独执行某一module中的task比较有用<br>gradle –profile//在根目录的build文件夹中生成task执行性能报告<br>gradle -b //指定build.gradle文件<br>gradle -P -D //从命令行传入参数到task中，-P作为project属性传入在task中可以直接使用，-D 需要System.properties[‘key’]来获取<br>例如有task如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">task firstTask &#60;&#60; &#123;&#10;    println &#39;--app:firstTask--&#39;&#10;&#10;    println &#34;param:$param&#34;&#10;&#10;    def key = System.properties[&#39;key&#39;]&#10;    println &#34;key:$key&#34;&#10;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>运行<br><code>gradlew.bat -Pparam=hello -Dkey=world firstTask</code><br>输出<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:app:firstTask&#10;--app:firstTask--&#10;param:hello&#10;key:world</span><br></pre></td></tr></table></figure></p>
+<h1 id="Jenkins"><a href="#Jenkins" class="headerlink" title="Jenkins"></a>Jenkins</h1><ol>
+<li>下载Tomcat并使其正常运行，作为jenkins的容器使用</li>
+<li>下载jenkins.war文件放到tomcat目录下webapps文件夹中，之后可以使用<code>http://localhost:8080/jenkins/</code>本地访问或者在局域网内用ip访问</li>
+<li>可以在环境变量中配置JENKINS_HOME来改变Jenkins默认路径</li>
+<li>在系统管理-&gt;插件管理中安装一个Gradle plugin,可以手动下载hip文件</li>
+<li>新建项目，增加构建步骤-<code>Invoke Gradle script</code>,选择<code>Use Gradle Wrapper</code>可以直接使用项目中的gradlew命令，否则<br>构建时会自动下载gradle</li>
+<li>配置构建参数，截图如下，包括设置<code>Root Build script</code>也就是build.gradle文件的位置；<code>Build File</code>指定build文件；<code>Tasks</code>指定需要执行的task，这里我自定义了<code>dist</code>和<code>updateIndexPage</code>两个task<br><img src="/images/jenkins_screenshot_1.png" alt=""><br><a href="">jenkins_screenshot</a><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1>Gradle作为一个功能强大而且使用方便的编译脚本，对java的兼容性使得Android开发者的学习成本很低。还有许多可以扩展的用法，例如自定义Plugin可以在插件化等问题上提供支持。上面只是简单介绍了一下和持续集成相关的用法，有时间再学习实践一下Gradle Plugin</li>
+</ol>
 
       
     </div>
@@ -324,7 +323,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/学习/" rel="tag">#学习</a>
+            <a href="/tags/android-编译-集成/" rel="tag">#android 编译 集成</a>
           
         </div>
       
@@ -333,17 +332,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/14/android-bind-service/" rel="next" title="android绑定service">
-                <i class="fa fa-chevron-left"></i> android绑定service
+              <a href="/2016/04/12/android-open-source-hawk-analysis/" rel="next" title="Android加密存储开源库Hawk源码分析">
+                <i class="fa fa-chevron-left"></i> Android加密存储开源库Hawk源码分析
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/18/leakcanary-source-code-analysis/" rel="prev" title="LeakCanary源码分析">
-                LeakCanary源码分析 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -369,8 +364,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/03/15/dreyfus-model-of-skill-acquisition/"
-           data-title="德莱弗斯技能学习模型" data-url="http://yoursite.com/2016/03/15/dreyfus-model-of-skill-acquisition/">
+      <div class="ds-thread" data-thread-key="2016/06/02/android-gradle-build-jenkins-continuous-integration/"
+           data-title="Android Gradle构建和Jenkins持续集成" data-url="http://yoursite.com/2016/06/02/android-gradle-build-jenkins-continuous-integration/">
       </div>
     
   </div>
@@ -466,7 +461,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Novice"><span class="nav-number">1.</span> <span class="nav-text">1. Novice</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Advanced-beginner"><span class="nav-number">2.</span> <span class="nav-text">2. Advanced beginner</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Competent"><span class="nav-number">3.</span> <span class="nav-text">3. Competent</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-Proficient"><span class="nav-number">4.</span> <span class="nav-text">4. Proficient</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-Expert"><span class="nav-number">5.</span> <span class="nav-text">5. Expert</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一点见解"><span class="nav-number"></span> <span class="nav-text">一点见解</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Gradle编译"><span class="nav-number">1.</span> <span class="nav-text">Gradle编译</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Groovy"><span class="nav-number">1.1.</span> <span class="nav-text">Groovy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gradle构建过程"><span class="nav-number">1.2.</span> <span class="nav-text">Gradle构建过程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Jenkins"><span class="nav-number">2.</span> <span class="nav-text">Jenkins</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
