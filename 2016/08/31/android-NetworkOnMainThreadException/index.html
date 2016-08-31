@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Android service," />
+  <meta name="keywords" content="android," />
 
 
 
@@ -57,16 +57,16 @@
 
 
 
-<meta name="description" content="Bound Services这篇关于绑定service的guide文档原文翻译网上有很多，增加一些需要注意的部分,部分代码在(我的github项目 leakcanary增加悬浮控制窗)，此处的客户端概念是service绑定的系统组件，例如activity service content provider(broadcast receiver不能绑定service)">
+<meta name="description" content="https://developer.android.com/reference/android/os/NetworkOnMainThreadException.htmlandroid.os.NetworkOnMainThreadException众所周知是在主线程上做网络操作抛出的异常，这里通过源代码对其产生的原因做一点分析和扩展">
 <meta property="og:type" content="article">
-<meta property="og:title" content="android绑定service">
-<meta property="og:url" content="http://yoursite.com/2016/03/14/android-bind-service/index.html">
+<meta property="og:title" content="android NetworkOnMainThreadException原理">
+<meta property="og:url" content="http://yoursite.com/2016/08/31/android-NetworkOnMainThreadException/index.html">
 <meta property="og:site_name" content="Mr.Icefox in coding...">
-<meta property="og:description" content="Bound Services这篇关于绑定service的guide文档原文翻译网上有很多，增加一些需要注意的部分,部分代码在(我的github项目 leakcanary增加悬浮控制窗)，此处的客户端概念是service绑定的系统组件，例如activity service content provider(broadcast receiver不能绑定service)">
-<meta property="og:updated_time" content="2016-03-18T09:49:51.283Z">
+<meta property="og:description" content="https://developer.android.com/reference/android/os/NetworkOnMainThreadException.htmlandroid.os.NetworkOnMainThreadException众所周知是在主线程上做网络操作抛出的异常，这里通过源代码对其产生的原因做一点分析和扩展">
+<meta property="og:updated_time" content="2016-08-31T08:42:42.492Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="android绑定service">
-<meta name="twitter:description" content="Bound Services这篇关于绑定service的guide文档原文翻译网上有很多，增加一些需要注意的部分,部分代码在(我的github项目 leakcanary增加悬浮控制窗)，此处的客户端概念是service绑定的系统组件，例如activity service content provider(broadcast receiver不能绑定service)">
+<meta name="twitter:title" content="android NetworkOnMainThreadException原理">
+<meta name="twitter:description" content="https://developer.android.com/reference/android/os/NetworkOnMainThreadException.htmlandroid.os.NetworkOnMainThreadException众所周知是在主线程上做网络操作抛出的异常，这里通过源代码对其产生的原因做一点分析和扩展">
 
 
 
@@ -84,7 +84,7 @@
   };
 </script>
 
-  <title> android绑定service | Mr.Icefox in coding... </title>
+  <title> android NetworkOnMainThreadException原理 | Mr.Icefox in coding... </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -214,7 +214,7 @@
             
             
               
-                android绑定service
+                android NetworkOnMainThreadException原理
               
             
           </h1>
@@ -226,38 +226,19 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-14T18:08:24+08:00" content="2016-03-14">
-              2016-03-14
+            <time itemprop="dateCreated" datetime="2016-08-31T16:31:51+08:00" content="2016-08-31">
+              2016-08-31
             </time>
           </span>
 
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android-Service/" itemprop="url" rel="index">
-                    <span itemprop="name">Android Service</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
           
 
           
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/14/android-bind-service/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/14/android-bind-service/" itemprop="commentsCount"></span>
+                <a href="/2016/08/31/android-NetworkOnMainThreadException/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/31/android-NetworkOnMainThreadException/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -267,7 +248,7 @@
 
           
           
-             <span id="/2016/03/14/android-bind-service/" class="leancloud_visitors" data-flag-title="android绑定service">
+             <span id="/2016/08/31/android-NetworkOnMainThreadException/" class="leancloud_visitors" data-flag-title="android NetworkOnMainThreadException原理">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -288,15 +269,28 @@
       
 
       
-        <p><a href="http://developer.android.com/guide/components/bound-services.html" target="_blank" rel="external">Bound Services</a>这篇关于绑定service的guide文档原文翻译网上有很多，增加一些需要注意的部分,部分代码在(我的github项目 <a href="https://github.com/MrIceFox/leakcanary" target="_blank" rel="external">leakcanary增加悬浮控制窗</a>)，此处的客户端概念是service绑定的系统组件，例如<code>activity service content provider</code>(<code>broadcast receiver</code>不能绑定<code>service</code>)<br><a id="more"></a></p>
-<h4 id="onBind"><a href="#onBind" class="headerlink" title="onBind"></a>onBind</h4><p>多个客户端同时绑定<code>service</code>时，方法<code>onBind()</code>将只调用一次，在首个客户端绑定之后的客户端得到的<code>IBinder</code>其实是一个，我曾经使用<code>Messenger</code>和重写<code>Binder</code>两种方式绑定同一个<code>service</code>，依据<code>Intent</code>来区分，结果发现在<code>Messenger</code>绑定成功之后另一个客户端得到的IBinder任然是上一个，抛<code>ClassCastException</code> 方法<code>public IBinder onBind(Intent intent)</code>参数<code>intent</code>可以携带绑定信息</p>
-<h4 id="重写Binder"><a href="#重写Binder" class="headerlink" title="重写Binder"></a>重写Binder</h4><p>如果<code>service</code>是app私有的(不为其他app提供服务),并且是和客户端运行于同一进程，重写<code>Binder</code>是优先考虑的绑定方式，例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public class ContractBinder extends Binder &#123;&#10;&#9;public AssistiveGuardService getService() &#123;&#9;&#10;&#9;&#9;return AssistiveGuardService.this;&#10;&#9;&#125;&#10;&#125;</span><br></pre></td></tr></table></figure></p>
-<p>需要注意的是，在使用<code>IntentService</code>作为客户端去绑定<code>service</code>的时候，可能在<code>ServiceConnection</code>还未建立的时候客户端就执行完毕了，而客户端需要在连接建立之后获取<code>service</code>的一些信息，这样就需要一些线程等待操作。</p>
-<h4 id="Messenger"><a href="#Messenger" class="headerlink" title="Messenger"></a>Messenger</h4><p>通过<code>Messenger</code>绑定<code>service</code>是最简单的IPC方式，如果<code>service</code>和客户端处于不同进程，优先考虑，代码参考<br><em>\samples\android-23\legacy\ApiDemos\src\com\example\android\apis\app\MessengerService.java</em><br>需要注意的是<code>message</code>携带的参数<code>message.obj</code>此处<code>obj</code>需要实现接口<code>Parcelable</code></p>
-<h4 id="AIDL"><a href="#AIDL" class="headerlink" title="AIDL"></a>AIDL</h4><p>AIDL主要使用在不同app之间<code>service</code>和客户端的IPC，和<code>Messenger</code>的主要区别在于<code>Messenger</code>是在一个线程中使用队列依次处理客户端请求，而AIDL则可以同时处理多个客户端请求，需要处理好多线程问题</p>
-<h4 id="service线程"><a href="#service线程" class="headerlink" title="service线程"></a>service线程</h4><p><code>service</code>处于单独进程的话，默认会在此进程再开启一个主线程运行<code>service</code></p>
-<h4 id="activity绑定"><a href="#activity绑定" class="headerlink" title="activity绑定"></a>activity绑定</h4><p>使用<code>activity</code>作为客户端绑定<code>service</code>的时候,如果和<code>service</code>的通信只需要在<code>activity</code>可见时发生，绑定和解绑操作放在onStart()和onStop()中，而如果需要在后台依然保持通信，绑定解绑操作适合放在onCreate()和onDestroy()中</p>
-<h4 id="内存问题"><a href="#内存问题" class="headerlink" title="内存问题"></a>内存问题</h4><p>如果你需要将你的app拆分为多个进程，尽量只在一个进程中渲染UI，而在其他进程中避免渲染任何UI，因为这将迅速增加此进程的内存消耗，特别是读取bitmap和其他资源的时候，当UI渲染之后想减少内存使用将变得很困难。参考:<br><a href="http://developer.android.com/training/articles/memory.html#MultipleProcesses" target="_blank" rel="external">http://developer.android.com/training/articles/memory.html#MultipleProcesses</a></p>
+        <p><a href="https://developer.android.com/reference/android/os/NetworkOnMainThreadException.html" title="官方文档" target="_blank" rel="external">https://developer.android.com/reference/android/os/NetworkOnMainThreadException.html</a><br><code>android.os.NetworkOnMainThreadException</code>众所周知是在主线程上做网络操作抛出的异常，这里通过源代码对其产生的原因做一点分析和扩展<a id="more"></a><br>在4.4.2手机上运行一段异常代码，日志如下</p>
+<blockquote>
+<p>E/AndroidRuntime: FATAL EXCEPTION: main<br>                                                                                                                                                android.os.NetworkOnMainThreadException<br>                                                                            at android.os.StrictMode$AndroidBlockGuardPolicy.onNetwork(StrictMode.java:1145)<br>                                                                            at libcore.io.BlockGuardOs.recvfrom(BlockGuardOs.java:163)<br>                                                                            at libcore.io.IoBridge.recvfrom(IoBridge.java:506)<br>                                                                            at java.net.PlainSocketImpl.read(PlainSocketImpl.java:488)<br>                                                                            at java.net.PlainSocketImpl.access$000(PlainSocketImpl.java:46)<br>                                                                            at java.net.PlainSocketImpl$PlainSocketInputStream.read(PlainSocketImpl.java:240)</p>
+</blockquote>
+<p>通过提示可以看到是在<code>PlainSocketImpl</code>的内部类<code>PlainSocketInputStream</code>读取字节流时抛出的,这里的<code>access$000</code>方法是java编译器为内部类访问外部方法时自动生成的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">220    private static class PlainSocketInputStream extends InputStream &#123;&#10;221        private final PlainSocketImpl socketImpl;&#10;222&#10;223        public PlainSocketInputStream(PlainSocketImpl socketImpl) &#123;&#10;224            this.socketImpl = socketImpl;&#10;225        &#125;&#10;226&#10;227        @Override public int available() throws IOException &#123;&#10;228            return socketImpl.available();&#10;229        &#125;&#10;230&#10;231        @Override public void close() throws IOException &#123;&#10;232            socketImpl.close();&#10;233        &#125;&#10;234&#10;235        @Override public int read() throws IOException &#123;&#10;236            return Streams.readSingleByte(this);&#10;237        &#125;&#10;238&#10;239        @Override public int read(byte[] buffer, int byteOffset, int byteCount) throws IOException &#123;&#10;240            return socketImpl.read(buffer, byteOffset, byteCount);&#10;241        &#125;&#10;242    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>实际上调用了<code>PlainSocketImpl</code>的<code>read</code>方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">480    private int read(byte[] buffer, int offset, int byteCount) throws IOException &#123;&#10;481        if (byteCount == 0) &#123;&#10;482            return 0;&#10;483        &#125;&#10;484        Arrays.checkOffsetAndCount(buffer.length, offset, byteCount);&#10;485        if (shutdownInput) &#123;&#10;486            return -1;&#10;487        &#125;&#10;488        int readCount = IoBridge.recvfrom(true, fd, buffer, offset, byteCount, 0, null, false);&#10;489        // Return of zero bytes for a blocking socket means a timeout occurred&#10;490        if (readCount == 0) &#123;&#10;491            throw new SocketTimeoutException();&#10;492        &#125;&#10;493        // Return of -1 indicates the peer was closed&#10;494        if (readCount == -1) &#123;&#10;495            shutdownInput = true;&#10;496        &#125;&#10;497        return readCount;&#10;498    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>从这段代码找到<code>IoBridge.recvfrom</code>这个方法可以看到，<code>IoBridge</code>作为桥接，调用<code>Libcore</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">502    public static int recvfrom(boolean isRead, FileDescriptor fd, byte[] bytes, int byteOffset, int byteCount, int flags, DatagramPacket packet, boolean isConnected) throws IOException &#123;&#10;503        int result;&#10;504        try &#123;&#10;505            InetSocketAddress srcAddress = (packet != null &#38;&#38; !isConnected) ? new InetSocketAddress() : null;&#10;506            result = Libcore.os.recvfrom(fd, bytes, byteOffset, byteCount, flags, srcAddress);&#10;507            result = postRecvfrom(isRead, packet, isConnected, srcAddress, result);&#10;508        &#125; catch (ErrnoException errnoException) &#123;&#10;509            result = maybeThrowAfterRecvfrom(isRead, isConnected, errnoException);&#10;510        &#125;&#10;511        return result;&#10;512    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>再看<code>LibCore</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">19public final class Libcore &#123;&#10;20    private Libcore() &#123; &#125;&#10;21&#10;22    public static Os os = new BlockGuardOs(new Posix());&#10;23&#125;</span><br></pre></td></tr></table></figure></p>
+<p>可以看到出问题的在<code>BlockGuardOs</code>中的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">162    @Override public int recvfrom(FileDescriptor fd, byte[] bytes, int byteOffset, int byteCount, int flags, InetSocketAddress srcAddress) throws ErrnoException, SocketException &#123;&#10;163        BlockGuard.getThreadPolicy().onNetwork();&#10;164        return os.recvfrom(fd, bytes, byteOffset, byteCount, flags, srcAddress);&#10;165    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>这里的<code>os</code>的实现类<code>Posix</code>最终通过native方法完成了网络操作，而在此之前的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BlockGuard.getThreadPolicy().onNetwork();</span><br></pre></td></tr></table></figure></p>
+<p>这行代码，抛出了<code>NetworkOnMainThreadException</code>异常，<code>BlockGuard</code>顾名思义是对可能产生阻塞的地方做预处理，<code>BlockGuardOs</code>其中有很多IO方法，猜测android的IO操作都是通过了这个预处理来防止主线程阻塞。<br>再看<code>BlockGuard</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">126    private static ThreadLocal&#60;Policy&#62; threadPolicy = new ThreadLocal&#60;Policy&#62;() &#123;&#10;127        @Override protected Policy initialValue() &#123;&#10;128            return LAX_POLICY;&#10;129        &#125;&#10;130    &#125;;</span><br></pre></td></tr></table></figure></p>
+<p>刚才用来做异常抛出的<code>ThreadPolicy</code>原来是一个<code>ThreadLocal</code>，让每个线程持有自己的<code>Policy</code>来做阻塞判断，可以预见这里主线程持有的<code>Policy</code>和其他子线程不同，对网络请求有特殊处理。<br><code>BlockGuard</code>中的这个<code>Policy</code>是在<code>StrictMode</code>的<code>setBlockGuardPolicy</code>方法中设置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">781    // Sets the policy in Dalvik/libcore (BlockGuard)&#10;782    private static void setBlockGuardPolicy(final int policyMask) &#123;&#10;783        if (policyMask == 0) &#123;&#10;784            BlockGuard.setThreadPolicy(BlockGuard.LAX_POLICY);&#10;785            return;&#10;786        &#125;&#10;787        final BlockGuard.Policy policy = BlockGuard.getThreadPolicy();&#10;788        final AndroidBlockGuardPolicy androidPolicy;&#10;789        if (policy instanceof AndroidBlockGuardPolicy) &#123;&#10;790            androidPolicy = (AndroidBlockGuardPolicy) policy;&#10;791        &#125; else &#123;&#10;792            androidPolicy = threadAndroidPolicy.get();&#10;793            BlockGuard.setThreadPolicy(androidPolicy);&#10;794        &#125;&#10;795        androidPolicy.setPolicyMask(policyMask);&#10;796    &#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>通常我们对<code>StrictMode</code>严格模式的使用是为了避免在主线程上做IO或者网络等耗时操作,优化用户体验，避免ANR</p>
+</blockquote>
+<p><code>AndroidBlockGuardPolicy</code>实现了<code>Policy</code>接口，其中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1140        public void onNetwork() &#123;&#10;1141            if ((mPolicyMask &#38; DETECT_NETWORK) == 0) &#123;&#10;1142                return;&#10;1143            &#125;&#10;1144            if ((mPolicyMask &#38; PENALTY_DEATH_ON_NETWORK) != 0) &#123;&#10;1145                throw new NetworkOnMainThreadException();//&#36825;&#37324;&#25243;&#20986;&#30340;&#24322;&#24120;&#10;1146            &#125;&#10;1147            if (tooManyViolationsThisLoop()) &#123;&#10;1148                return;&#10;1149            &#125;&#10;1150            BlockGuard.BlockGuardPolicyException e = new StrictModeNetworkViolation(mPolicyMask);&#10;1151            e.fillInStackTrace();&#10;1152            startHandlingViolationException(e);&#10;1153        &#125;</span><br></pre></td></tr></table></figure>
+<p>使用位操作来判断阻塞，<code>PENALTY_DEATH_ON_NETWORK</code>在<code>enableDeathOnNetwork</code>中被打开<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">987    /**&#10;988     * Used by the framework to make network usage on the main&#10;989     * thread a fatal error.&#10;990     *&#10;991     * @hide&#10;992     */&#10;993    public static void enableDeathOnNetwork() &#123;&#10;994        int oldPolicy = getThreadPolicyMask();&#10;995        int newPolicy = oldPolicy | DETECT_NETWORK | PENALTY_DEATH_ON_NETWORK;&#10;996        setThreadPolicyMask(newPolicy);&#10;997    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>而在<code>ActivityThread</code>的<code>handleBindApplication</code>中有这么一行代码<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">4196        if (data.appInfo.targetSdkVersion &#62; 9) &#123;&#10;4197            StrictMode.enableDeathOnNetwork();&#10;4198        &#125;</span><br></pre></td></tr></table></figure></p>
+<p>也就是说在app启动时，4.4.2版本默认对sdk9以上的主线程开启了不得在主线程上做网络操作</p>
+<p>到这里可以总结一下，网络操作通过<code>BlockGuardOs</code>来执行，而其中的IO操作被<code>BlockGuard</code>预处理，<code>BlockGuard</code>则是通过当前线程上的<code>policy</code>策略来做处理，而主线程上的<code>policy</code>在app启动时就被设置为不得在主线程上做网络操作，所以如果我们在主线程上做将这个开关重置，即可在主线程上做网络操作而不会抛出<code>NetworkOnMainThreadException</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">StrictMode.ThreadPolicy threadPolicy = new StrictMode.ThreadPolicy.Builder().permitNetwork().build();&#10;StrictMode.setThreadPolicy(threadPolicy);</span><br></pre></td></tr></table></figure></p>
+<p>当然这里只是为了理解原理，不建议在生产环境关闭这个开关</p>
 
       
     </div>
@@ -311,7 +305,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Android-service/" rel="tag">#Android service</a>
+            <a href="/tags/android/" rel="tag">#android</a>
           
         </div>
       
@@ -320,17 +314,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/02/23/begin-writing/" rel="next" title="开始写博客">
-                <i class="fa fa-chevron-left"></i> 开始写博客
+              <a href="/2016/06/02/android-gradle-build-jenkins-continuous-integration/" rel="next" title="Android Gradle构建和Jenkins持续集成">
+                <i class="fa fa-chevron-left"></i> Android Gradle构建和Jenkins持续集成
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/15/dreyfus-model-of-skill-acquisition/" rel="prev" title="德莱弗斯技能学习模型">
-                德莱弗斯技能学习模型 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -356,8 +346,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/03/14/android-bind-service/"
-           data-title="android绑定service" data-url="http://yoursite.com/2016/03/14/android-bind-service/">
+      <div class="ds-thread" data-thread-key="2016/08/31/android-NetworkOnMainThreadException/"
+           data-title="android NetworkOnMainThreadException原理" data-url="http://yoursite.com/2016/08/31/android-NetworkOnMainThreadException/">
       </div>
     
   </div>
@@ -453,7 +443,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#onBind"><span class="nav-number">1.</span> <span class="nav-text">onBind</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重写Binder"><span class="nav-number">2.</span> <span class="nav-text">重写Binder</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Messenger"><span class="nav-number">3.</span> <span class="nav-text">Messenger</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AIDL"><span class="nav-number">4.</span> <span class="nav-text">AIDL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#service线程"><span class="nav-number">5.</span> <span class="nav-text">service线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#activity绑定"><span class="nav-number">6.</span> <span class="nav-text">activity绑定</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内存问题"><span class="nav-number">7.</span> <span class="nav-text">内存问题</span></a></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

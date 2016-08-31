@@ -63,7 +63,7 @@
 <meta property="og:url" content="http://yoursite.com/2016/04/12/android-open-source-hawk-analysis/index.html">
 <meta property="og:site_name" content="Mr.Icefox in coding...">
 <meta property="og:description" content="简介Hawk是一个安卓加密本地存储的开源项目，以key-value作为存储形式，提供了put/get等简单的API，通常作为项目中的一个基础库使用。最近关注本地存储，看了看它的源码，发现一些问题，也提了一些PR。在这里通过Hawk v1.23的源代码，结合使用，分析一下它的原理，提出一些使用的注意事项。">
-<meta property="og:updated_time" content="2016-04-12T10:20:04.604Z">
+<meta property="og:updated_time" content="2016-08-31T08:45:37.641Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android加密存储开源库Hawk源码分析">
 <meta name="twitter:description" content="简介Hawk是一个安卓加密本地存储的开源项目，以key-value作为存储形式，提供了put/get等简单的API，通常作为项目中的一个基础库使用。最近关注本地存储，看了看它的源码，发现一些问题，也提了一些PR。在这里通过Hawk v1.23的源代码，结合使用，分析一下它的原理，提出一些使用的注意事项。">
@@ -129,7 +129,7 @@
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
-  <p class="site-subtitle">努力造轮子</p>
+  <p class="site-subtitle">RTFSC</p>
 </div>
 
 <div class="site-nav-toggle">
@@ -271,7 +271,7 @@
       
         <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p><a href="https://github.com/orhanobut/hawk" target="_blank" rel="external">Hawk</a>是一个安卓加密本地存储的开源项目，以key-value作为存储形式，提供了put/get等简单的API，通常作为项目中的一个基础库使用。最近关注本地存储，看了看它的源码，发现一些问题，也提了一些PR。在这里通过Hawk v1.23的源代码，结合使用，分析一下它的原理，提出一些使用的注意事项。<br><a id="more"></a></p>
 <h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><ol>
-<li>初始化<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">//&#21021;&#22987;&#21270;&#26041;&#24335;&#24314;&#35758;&#22312;applicatin&#20013;&#35843;&#29992;&#65292;&#20063;&#21487;&#20197;&#22312;activity&#20013;&#10;Hawk.init(this)&#10;&#9;//&#21152;&#23494;&#26041;&#27861;&#26377;HIGHEST, MEDIUM, NO_ENCRYPTION &#20998;&#21035;&#34920;&#31034;&#39640;&#32423;&#21152;&#23494;(&#24517;&#39035;&#35774;&#32622;&#23494;&#30721;),&#20013;&#32423;&#21152;&#23494;,&#19981;&#21152;&#23494;&#10;    .setEncryptionMethod(HawkBuilder.EncryptionMethod.MEDIUM)&#10;&#9;//&#23384;&#20648;&#26041;&#24335;&#38500;&#20102;sqlite&#36824;&#26377;&#37197;&#32622;&#25991;&#20214;&#65292;&#36890;&#36807;.setStorage(HawkBuilder.newSharedPrefStorage(this))&#26469;&#35774;&#32622;&#10;    .setStorage(HawkBuilder.newSqliteStorage(this))&#10;&#9;//LogLevel.NONE &#19981;&#25171;&#21360;&#26085;&#24535;&#65292;&#22312;&#21457;&#24067;&#26102;&#38656;&#35201;&#35774;&#32622;&#19968;&#19979;&#10;    .setLogLevel(LogLevel.FULL)&#10;&#9;//&#35774;&#32622;&#23494;&#30721;&#65292;&#21482;&#22312;&#21152;&#23494;&#26041;&#27861;&#20026;&#39640;&#32423;&#26102;&#26377;&#29992;&#10;&#9;.setPassword(pawd)&#10;&#9;//&#21487;&#20197;&#20351;&#29992;buildRx()&#26041;&#27861;&#26469;&#24471;&#21040;&#19968;&#20010;rx.observable&#20294;&#26159;&#27880;&#24847;&#38656;&#35201;&#39069;&#22806;&#24341;&#20837;rxjava&#65292;&#22240;&#20026;HawK&#26412;&#36523;&#24182;&#19981;&#21253;&#21547;rxjava&#10;    .build();</span><br></pre></td></tr></table></figure>
+<li>初始化<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//初始化方式建议在applicatin中调用，也可以在activity中</span></span><br><span class="line">Hawk.init(<span class="keyword">this</span>)</span><br><span class="line">	<span class="comment">//加密方法有HIGHEST, MEDIUM, NO_ENCRYPTION 分别表示高级加密(必须设置密码),中级加密,不加密</span></span><br><span class="line">    .setEncryptionMethod(HawkBuilder.EncryptionMethod.MEDIUM)</span><br><span class="line">	<span class="comment">//存储方式除了sqlite还有配置文件，通过.setStorage(HawkBuilder.newSharedPrefStorage(this))来设置</span></span><br><span class="line">    .setStorage(HawkBuilder.newSqliteStorage(<span class="keyword">this</span>))</span><br><span class="line">	<span class="comment">//LogLevel.NONE 不打印日志，在发布时需要设置一下</span></span><br><span class="line">    .setLogLevel(LogLevel.FULL)</span><br><span class="line">	<span class="comment">//设置密码，只在加密方法为高级时有用</span></span><br><span class="line">	.setPassword(pawd)</span><br><span class="line">	<span class="comment">//可以使用buildRx()方法来得到一个rx.observable但是注意需要额外引入rxjava，因为HawK本身并不包含rxjava</span></span><br><span class="line">    .build();</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <p>由于<code>Hawk</code>只提供单例，因此如果改变密码并重新初始化<code>Hawk</code>，此前保存的数据将不可读。</p>
@@ -436,7 +436,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-count">8</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -453,7 +453,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -880,6 +880,8 @@
 
 
 
+  
+  <a href="https://github.com/MrIceFox"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
 
 </body>
 </html>
