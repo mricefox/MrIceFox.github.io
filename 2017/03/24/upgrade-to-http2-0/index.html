@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="学习," />
+  <meta name="keywords" content="android https http2.0," />
 
 
 
@@ -57,16 +57,16 @@
 
 
 
-<meta name="description" content="wiki:Dreyfus model of skill acquisition这个模型将技能水准分为5个等级，对评估自己的技能，驱动自己进入更高水准，有一些帮助吧">
+<meta name="description" content="HTTP/2作为HTTP协议的一次升级，广泛为各大厂采用，相比HTTP/1.1,它采用多路复用、头部压缩等技术提升了性能。因此android客户端的网络架构也有必要向HTTP/2做一次升级。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="德莱弗斯技能学习模型">
-<meta property="og:url" content="http://yoursite.com/2016/03/15/dreyfus-model-of-skill-acquisition/index.html">
+<meta property="og:title" content="Android客户端升级http/2的一些问题">
+<meta property="og:url" content="http://yoursite.com/2017/03/24/upgrade-to-http2-0/index.html">
 <meta property="og:site_name" content="Mr.Icefox in coding...">
-<meta property="og:description" content="wiki:Dreyfus model of skill acquisition这个模型将技能水准分为5个等级，对评估自己的技能，驱动自己进入更高水准，有一些帮助吧">
-<meta property="og:updated_time" content="2016-03-16T03:02:39.374Z">
+<meta property="og:description" content="HTTP/2作为HTTP协议的一次升级，广泛为各大厂采用，相比HTTP/1.1,它采用多路复用、头部压缩等技术提升了性能。因此android客户端的网络架构也有必要向HTTP/2做一次升级。">
+<meta property="og:updated_time" content="2017-03-24T11:07:51.777Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="德莱弗斯技能学习模型">
-<meta name="twitter:description" content="wiki:Dreyfus model of skill acquisition这个模型将技能水准分为5个等级，对评估自己的技能，驱动自己进入更高水准，有一些帮助吧">
+<meta name="twitter:title" content="Android客户端升级http/2的一些问题">
+<meta name="twitter:description" content="HTTP/2作为HTTP协议的一次升级，广泛为各大厂采用，相比HTTP/1.1,它采用多路复用、头部压缩等技术提升了性能。因此android客户端的网络架构也有必要向HTTP/2做一次升级。">
 
 
 
@@ -84,7 +84,7 @@
   };
 </script>
 
-  <title> 德莱弗斯技能学习模型 | Mr.Icefox in coding... </title>
+  <title> Android客户端升级http/2的一些问题 | Mr.Icefox in coding... </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -214,7 +214,7 @@
             
             
               
-                德莱弗斯技能学习模型
+                Android客户端升级http/2的一些问题
               
             
           </h1>
@@ -226,38 +226,19 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-15T23:21:22+08:00" content="2016-03-15">
-              2016-03-15
+            <time itemprop="dateCreated" datetime="2017-03-24T19:07:51+08:00" content="2017-03-24">
+              2017-03-24
             </time>
           </span>
 
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/闲扯/" itemprop="url" rel="index">
-                    <span itemprop="name">闲扯</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
           
 
           
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/15/dreyfus-model-of-skill-acquisition/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/15/dreyfus-model-of-skill-acquisition/" itemprop="commentsCount"></span>
+                <a href="/2017/03/24/upgrade-to-http2-0/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/24/upgrade-to-http2-0/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -267,7 +248,7 @@
 
           
           
-             <span id="/2016/03/15/dreyfus-model-of-skill-acquisition/" class="leancloud_visitors" data-flag-title="德莱弗斯技能学习模型">
+             <span id="/2017/03/24/upgrade-to-http2-0/" class="leancloud_visitors" data-flag-title="Android客户端升级http/2的一些问题">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -288,28 +269,58 @@
       
 
       
-        <p>wiki:<br><a href="https://en.wikipedia.org/wiki/Dreyfus_model_of_skill_acquisition" target="_blank" rel="external">Dreyfus model of skill acquisition</a><br>这个模型将技能水准分为5个等级，对评估自己的技能，驱动自己进入更高水准，有一些帮助吧<br><a id="more"></a></p>
-<h4 id="1-Novice"><a href="#1-Novice" class="headerlink" title="1. Novice"></a>1. Novice</h4><blockquote>
-<p>新手，严格遵循学会的法则或者规划，没有自己的推断。</p>
-</blockquote>
-<p>刚学会，只能照着说明书去做。</p>
-<h4 id="2-Advanced-beginner"><a href="#2-Advanced-beginner" class="headerlink" title="2. Advanced beginner"></a>2. Advanced beginner</h4><blockquote>
-<p>初学者，有一定的情景感知，各方面工作用同等的优先级区分对待。</p>
-</blockquote>
-<p>会在适当情形下想到，该用这个了。</p>
-<h4 id="3-Competent"><a href="#3-Competent" class="headerlink" title="3. Competent"></a>3. Competent</h4><blockquote>
-<p>能够胜任，累计了一定的活动和信息，有一些关于目标的实现思路，设计规划，构想实现路径。</p>
-</blockquote>
-<p>多次重复下终于有了一点自己的想法。</p>
-<h4 id="4-Proficient"><a href="#4-Proficient" class="headerlink" title="4. Proficient"></a>4. Proficient</h4><blockquote>
-<p>精通，全局视野，对各方面工作可以区分优先级，从通常模式中可以感觉到偏差，采用适应当前情形的准则作为指导</p>
-</blockquote>
-<p>玩腻了简单重复，开始注重细节。</p>
-<h4 id="5-Expert"><a href="#5-Expert" class="headerlink" title="5. Expert"></a>5. Expert</h4><blockquote>
-<p>专家，不依赖于规则，指南和准则，本能而默契地抓住问题的核心，有预见性，在新情形或者问题下用分析的方法解决。</p>
-</blockquote>
-<p>抛弃常规手段，抓住核心有预见性的使用自己的方法</p>
-<h3 id="一点见解"><a href="#一点见解" class="headerlink" title="一点见解"></a>一点见解</h3><p>学东西的过程，大多是按着上面5个阶段进行。在新手阶段感到不适感很强，不会的很多，但是又急于跳到下一个阶段，这个阶段多一点耐心，降低一些期望，有助于快速入门。而到了熟练掌握这个阶段，不适感没了，大脑喜欢重复的工作，这个阶段多一点好奇心，提高一些期望，让自己不适感多一些，跳出重复劳动的圈子。再高一点的阶段，多总结，多挖掘细节，总结建立自己的体系。</p>
+        <p>HTTP/2作为HTTP协议的一次升级，广泛为各大厂采用，相比HTTP/1.1,它采用多路复用、头部压缩等技术提升了性能。因此android客户端的网络架构也有必要向HTTP/2做一次升级。<br><a id="more"></a></p>
+<h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><ul>
+<li>android原生HttpURLConnection并不支持HTTP/2，选用三方开源库okhttp作为网络框架</li>
+</ul>
+<ul>
+<li><p>android 5.0+设备才支持HTTP/2</p>
+<pre><code>这是由于5.0以下设备并没有支持APLN（4.4支持但是并不稳定），关于ALPN就需要谈一谈HTTP/2的协议协商机制。也就是客户端和服务器之间是如何确定要使用哪个版本的HTTP协议
+
+第一种方式，客户端明文发送HTTP请求，在头部加入
+</code></pre><blockquote>
+<p>Connection: Upgrade</p>
+<pre><code>Upgrade: protocol-name[/protocol-version]
+</code></pre></blockquote>
+<p>  而服务器不同意升级或者不支持 Upgrade 所列出的协议，直接忽略即可，否则响应</p>
+<blockquote>
+<p>HTTP/1.1 101 Switching Protocols</p>
+<pre><code>Connection: upgrade
+Upgrade: protocol-name[/protocol-version]
+[... data defined by new protocol ...]
+</code></pre></blockquote>
+<p>  但是我们现有HTTP/2都是架设在TLS之上使用HTTPS传输，上面这种明文协商的方式不被采用，除了安全性方面的问题之外，还有许多浏览器(chrome,firefox)不支持、一次多余的RTT等原因</p>
+<p>  第二种方式就是架设在TLS之上，也就是在TLS连接时将HTTP协议的协商加入进去。我们知道在TLS握手的过程中，第一次client hello客户端需要将支持的加密方式，生成的随机数，支持的版本号发送给服务器。而google对TLS做了一个扩展，建立了ALPN协议（Application Layer Protocol Negotiation，应用层协议协商），在client hello中通过ALPN列出自己支持的应用层协议，其中，HTTP/2 协议名称是 h2。如果服务端支持 HTTP/2，在 Server Hello 中指定 ALPN 的结果为 h2 就可以了；如果服务端不支持 HTTP/2，从客户端的 ALPN 列表中选一个自己支持的即可。</p>
+</li>
+<li>CA认证的证书或者自签名证书</li>
+</ul>
+<h3 id="升级"><a href="#升级" class="headerlink" title="升级"></a>升级</h3><p>既然需要使用HTTPS，就涉及到证书的问题，CA认证证书的使用较为简单，一般无需额外配置。下面介绍一下自签名证书的使用</p>
+<ol>
+<li><code>WebView</code>使用自签名证书</li>
+</ol>
+<ul>
+<li>信任自签名证书<br>这里需要重写<code>WebViewClient</code>的<code>onReceivedSslError</code>方法<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="annotation">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onReceivedSslError</span><span class="params">(WebView view, SslErrorHandler handler, SslError error)</span> </span>&#123;</span><br><span class="line"><span class="comment">//                super.onReceivedSslError(view, handler, error);//不放行非CA证书</span></span><br><span class="line"><span class="comment">//                handler.proceed();//放行任何证书</span></span><br><span class="line">                Bundle bundle = SslCertificate.saveState(error.getCertificate());</span><br><span class="line">                <span class="keyword">byte</span>[] bytes = bundle.getByteArray(<span class="string">"x509-certificate"</span>);</span><br><span class="line"></span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    CertificateFactory certificateFactory = CertificateFactory.getInstance(<span class="string">"X.509"</span>);</span><br><span class="line">                    Certificate cert = certificateFactory.generateCertificate(<span class="keyword">new</span> ByteArrayInputStream(bytes));</span><br><span class="line">                    <span class="keyword">if</span> (<span class="string">"sha256/AAAAAAAAAAAAAA="</span>.equals(CertificatePinner.pin(cert))) &#123;</span><br><span class="line">                        handler.proceed();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="keyword">catch</span> (CertificateException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">                handler.cancel();</span><br><span class="line">            &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><code>sha256/AAAAAAAAAAAAAA=</code>是证书公钥，可以通过证书文件生成<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">String <span class="title">getPublicKey</span><span class="params">(InputStream inputStream)</span> <span class="keyword">throws</span> CertificateException </span>&#123;</span><br><span class="line">        CertificateFactory certificateFactory = CertificateFactory.getInstance(<span class="string">"X.509"</span>);</span><br><span class="line">        Certificate cert = certificateFactory.generateCertificate(inputStream);</span><br><span class="line">        <span class="keyword">return</span> CertificatePinner.pin(cert);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>为了防止被Charles或者Fillder抓包，需要配置SSL Pinng 由于<code>WebView</code>没有SSL Pinning相关api，需要重写<code>WebViewClient#shouldInterceptRequest</code>方法，在webview的请求和服务端之间做一次代理，然后在生成<code>WebResourceResponse</code>的过程中验证私有证书，参考<a href="https://github.com/menjoo/Android-SSL-Pinning-WebViews" title="Android-SSL-Pinning-WebViews" target="_blank" rel="external">https://github.com/menjoo/Android-SSL-Pinning-WebViews</a></li>
+</ul>
+<ol>
+<li>okhttp使用自签名证书</li>
+</ol>
+<ul>
+<li>信任自签名证书(略)</li>
+<li>SSL Pinning<br>除了信任自签名证书之外，还需要将域名与证书公钥绑定<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> CertificatePinner privateCertPinner = <span class="keyword">new</span> CertificatePinner.Builder()</span><br><span class="line">            .add(<span class="string">"www.yourdomain.com"</span>, <span class="string">"sha256/AAAAAAAAAAAAAA="</span>)</span><br><span class="line">            .build();</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ol>
+<li>android 5.0+以上设备对https页面中加载非安全资源做出了限制，例如网页url为<a href="https://www.example.com" target="_blank" rel="external">https://www.example.com</a> 而网页资源css等存放在http服务器中，5.0+以上设备将无法加载出网页，需要设置<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://imququ.com/post/protocol-negotiation-in-http2.html" title="谈谈 HTTP/2 的协议协商机制" target="_blank" rel="external">https://imququ.com/post/protocol-negotiation-in-http2.html</a></p>
+<p><a href="https://segmentfault.com/a/1190000002757622" title="http2-协议协商过程" target="_blank" rel="external">https://segmentfault.com/a/1190000002757622</a></p>
+<p><a href="https://github.com/menjoo/Android-SSL-Pinning-WebViews" title="Android-SSL-Pinning-WebViews" target="_blank" rel="external">https://github.com/menjoo/Android-SSL-Pinning-WebViews</a></p>
 
       
     </div>
@@ -324,7 +335,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/学习/" rel="tag">#学习</a>
+            <a href="/tags/android-https-http2-0/" rel="tag">#android https http2.0</a>
           
         </div>
       
@@ -333,17 +344,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/14/android-bind-service/" rel="next" title="android绑定service">
-                <i class="fa fa-chevron-left"></i> android绑定service
+              <a href="/2016/08/31/android-NetworkOnMainThreadException/" rel="next" title="android NetworkOnMainThreadException原理">
+                <i class="fa fa-chevron-left"></i> android NetworkOnMainThreadException原理
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/18/leakcanary-source-code-analysis/" rel="prev" title="LeakCanary源码分析">
-                LeakCanary源码分析 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -369,8 +376,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/03/15/dreyfus-model-of-skill-acquisition/"
-           data-title="德莱弗斯技能学习模型" data-url="http://yoursite.com/2016/03/15/dreyfus-model-of-skill-acquisition/">
+      <div class="ds-thread" data-thread-key="2017/03/24/upgrade-to-http2-0/"
+           data-title="Android客户端升级http/2的一些问题" data-url="http://yoursite.com/2017/03/24/upgrade-to-http2-0/">
       </div>
     
   </div>
@@ -466,7 +473,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Novice"><span class="nav-number">1.</span> <span class="nav-text">1. Novice</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Advanced-beginner"><span class="nav-number">2.</span> <span class="nav-text">2. Advanced beginner</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Competent"><span class="nav-number">3.</span> <span class="nav-text">3. Competent</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-Proficient"><span class="nav-number">4.</span> <span class="nav-text">4. Proficient</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-Expert"><span class="nav-number">5.</span> <span class="nav-text">5. Expert</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一点见解"><span class="nav-number"></span> <span class="nav-text">一点见解</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#准备"><span class="nav-number">1.</span> <span class="nav-text">准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#升级"><span class="nav-number">2.</span> <span class="nav-text">升级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
