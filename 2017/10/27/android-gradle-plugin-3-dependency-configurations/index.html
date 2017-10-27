@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Android service," />
+  <meta name="keywords" content="android gradle plugin," />
 
 
 
@@ -57,16 +57,16 @@
 
 
 
-<meta name="description" content="Bound Services这篇关于绑定service的guide文档原文翻译网上有很多，增加一些需要注意的部分,部分代码在(我的github项目 leakcanary增加悬浮控制窗)，此处的客户端概念是service绑定的系统组件，例如activity service content provider(broadcast receiver不能绑定service)">
+<meta name="description" content="android gradle plugin 3.0.0新增了implementation 和api两个依赖配置，在介绍新的依赖配置前，先对原有的依赖配置做一个介绍">
 <meta property="og:type" content="article">
-<meta property="og:title" content="android绑定service">
-<meta property="og:url" content="http://yoursite.com/2016/03/14/android-bind-service/index.html">
+<meta property="og:title" content="android gradle plugin 3.0.0 dependency configurations">
+<meta property="og:url" content="http://yoursite.com/2017/10/27/android-gradle-plugin-3-dependency-configurations/index.html">
 <meta property="og:site_name" content="Mr.Icefox in coding...">
-<meta property="og:description" content="Bound Services这篇关于绑定service的guide文档原文翻译网上有很多，增加一些需要注意的部分,部分代码在(我的github项目 leakcanary增加悬浮控制窗)，此处的客户端概念是service绑定的系统组件，例如activity service content provider(broadcast receiver不能绑定service)">
-<meta property="og:updated_time" content="2016-03-18T09:49:51.283Z">
+<meta property="og:description" content="android gradle plugin 3.0.0新增了implementation 和api两个依赖配置，在介绍新的依赖配置前，先对原有的依赖配置做一个介绍">
+<meta property="og:updated_time" content="2017-10-27T10:02:03.183Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="android绑定service">
-<meta name="twitter:description" content="Bound Services这篇关于绑定service的guide文档原文翻译网上有很多，增加一些需要注意的部分,部分代码在(我的github项目 leakcanary增加悬浮控制窗)，此处的客户端概念是service绑定的系统组件，例如activity service content provider(broadcast receiver不能绑定service)">
+<meta name="twitter:title" content="android gradle plugin 3.0.0 dependency configurations">
+<meta name="twitter:description" content="android gradle plugin 3.0.0新增了implementation 和api两个依赖配置，在介绍新的依赖配置前，先对原有的依赖配置做一个介绍">
 
 
 
@@ -84,7 +84,7 @@
   };
 </script>
 
-  <title> android绑定service | Mr.Icefox in coding... </title>
+  <title> android gradle plugin 3.0.0 dependency configurations | Mr.Icefox in coding... </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -214,7 +214,7 @@
             
             
               
-                android绑定service
+                android gradle plugin 3.0.0 dependency configurations
               
             
           </h1>
@@ -226,38 +226,19 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-14T18:08:24+08:00" content="2016-03-14">
-              2016-03-14
+            <time itemprop="dateCreated" datetime="2017-10-27T18:02:03+08:00" content="2017-10-27">
+              2017-10-27
             </time>
           </span>
 
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android-Service/" itemprop="url" rel="index">
-                    <span itemprop="name">Android Service</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
           
 
           
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/14/android-bind-service/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/14/android-bind-service/" itemprop="commentsCount"></span>
+                <a href="/2017/10/27/android-gradle-plugin-3-dependency-configurations/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/10/27/android-gradle-plugin-3-dependency-configurations/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -267,7 +248,7 @@
 
           
           
-             <span id="/2016/03/14/android-bind-service/" class="leancloud_visitors" data-flag-title="android绑定service">
+             <span id="/2017/10/27/android-gradle-plugin-3-dependency-configurations/" class="leancloud_visitors" data-flag-title="android gradle plugin 3.0.0 dependency configurations">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -288,15 +269,44 @@
       
 
       
-        <p><a href="http://developer.android.com/guide/components/bound-services.html" target="_blank" rel="external">Bound Services</a>这篇关于绑定service的guide文档原文翻译网上有很多，增加一些需要注意的部分,部分代码在(我的github项目 <a href="https://github.com/MrIceFox/leakcanary" target="_blank" rel="external">leakcanary增加悬浮控制窗</a>)，此处的客户端概念是service绑定的系统组件，例如<code>activity service content provider</code>(<code>broadcast receiver</code>不能绑定<code>service</code>)<br><a id="more"></a></p>
-<h4 id="onBind"><a href="#onBind" class="headerlink" title="onBind"></a>onBind</h4><p>多个客户端同时绑定<code>service</code>时，方法<code>onBind()</code>将只调用一次，在首个客户端绑定之后的客户端得到的<code>IBinder</code>其实是一个，我曾经使用<code>Messenger</code>和重写<code>Binder</code>两种方式绑定同一个<code>service</code>，依据<code>Intent</code>来区分，结果发现在<code>Messenger</code>绑定成功之后另一个客户端得到的IBinder任然是上一个，抛<code>ClassCastException</code> 方法<code>public IBinder onBind(Intent intent)</code>参数<code>intent</code>可以携带绑定信息</p>
-<h4 id="重写Binder"><a href="#重写Binder" class="headerlink" title="重写Binder"></a>重写Binder</h4><p>如果<code>service</code>是app私有的(不为其他app提供服务),并且是和客户端运行于同一进程，重写<code>Binder</code>是优先考虑的绑定方式，例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public class ContractBinder extends Binder &#123;&#10;&#9;public AssistiveGuardService getService() &#123;&#9;&#10;&#9;&#9;return AssistiveGuardService.this;&#10;&#9;&#125;&#10;&#125;</span><br></pre></td></tr></table></figure></p>
-<p>需要注意的是，在使用<code>IntentService</code>作为客户端去绑定<code>service</code>的时候，可能在<code>ServiceConnection</code>还未建立的时候客户端就执行完毕了，而客户端需要在连接建立之后获取<code>service</code>的一些信息，这样就需要一些线程等待操作。</p>
-<h4 id="Messenger"><a href="#Messenger" class="headerlink" title="Messenger"></a>Messenger</h4><p>通过<code>Messenger</code>绑定<code>service</code>是最简单的IPC方式，如果<code>service</code>和客户端处于不同进程，优先考虑，代码参考<br><em>\samples\android-23\legacy\ApiDemos\src\com\example\android\apis\app\MessengerService.java</em><br>需要注意的是<code>message</code>携带的参数<code>message.obj</code>此处<code>obj</code>需要实现接口<code>Parcelable</code></p>
-<h4 id="AIDL"><a href="#AIDL" class="headerlink" title="AIDL"></a>AIDL</h4><p>AIDL主要使用在不同app之间<code>service</code>和客户端的IPC，和<code>Messenger</code>的主要区别在于<code>Messenger</code>是在一个线程中使用队列依次处理客户端请求，而AIDL则可以同时处理多个客户端请求，需要处理好多线程问题</p>
-<h4 id="service线程"><a href="#service线程" class="headerlink" title="service线程"></a>service线程</h4><p><code>service</code>处于单独进程的话，默认会在此进程再开启一个主线程运行<code>service</code></p>
-<h4 id="activity绑定"><a href="#activity绑定" class="headerlink" title="activity绑定"></a>activity绑定</h4><p>使用<code>activity</code>作为客户端绑定<code>service</code>的时候,如果和<code>service</code>的通信只需要在<code>activity</code>可见时发生，绑定和解绑操作放在onStart()和onStop()中，而如果需要在后台依然保持通信，绑定解绑操作适合放在onCreate()和onDestroy()中</p>
-<h4 id="内存问题"><a href="#内存问题" class="headerlink" title="内存问题"></a>内存问题</h4><p>如果你需要将你的app拆分为多个进程，尽量只在一个进程中渲染UI，而在其他进程中避免渲染任何UI，因为这将迅速增加此进程的内存消耗，特别是读取bitmap和其他资源的时候，当UI渲染之后想减少内存使用将变得很困难。参考:<br><a href="http://developer.android.com/training/articles/memory.html#MultipleProcesses" target="_blank" rel="external">http://developer.android.com/training/articles/memory.html#MultipleProcesses</a></p>
+        <p>android gradle plugin 3.0.0新增了<code>implementation</code> 和<code>api</code>两个依赖配置，在介绍新的依赖配置前，先对原有的依赖配置做一个介绍<br><a id="more"></a><br>示例工程<code>project</code>间依赖关系:<code>app -&gt; firstlayerlib-&gt; secondlayerlib</code>，三个工程都是android工程</p>
+<ul>
+<li><h4 id="compile"><a href="#compile" class="headerlink" title="compile"></a>compile</h4></li>
+</ul>
+<p>运行时和编译时都可以被使用方依赖, 例如以下<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//app和firstlayerlib都可以引用到secondlayerlib中代码和资源</span></span><br><span class="line"><span class="comment">//app build.gradle</span></span><br><span class="line">dependencies &#123;</span><br><span class="line">	compile project(<span class="string">':firstlayerlib'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//firstlayerlib build.gradle</span></span><br><span class="line">dependencies &#123;</span><br><span class="line">	compile project(<span class="string">':secondlayerlib'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//secondlayerlib build.gradle</span></span><br><span class="line">dependencies &#123;</span><br><span class="line">	<span class="comment">//empty</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>而使用<code>transitive</code>配置传递依赖只对artifact有效，对<code>project</code>无效，将<em>app build.gradle</em>修改为<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//app仍然可以引用到secondlayerlib中代码和资源</span></span><br><span class="line"><span class="comment">//app build.gradle</span></span><br><span class="line">dependencies &#123;</span><br><span class="line">	compile(project(<span class="string">':firstlayerlib'</span>)) &#123;</span><br><span class="line">        transitive = <span class="literal">false</span><span class="comment">//不设置默认为true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>而将<code>firstlayerlib</code>发布变成artifact之后,<code>transitive</code>生效，<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//firstlayerlib可以，而app无法引用到secondlayerlib中代码和资源</span></span><br><span class="line"><span class="comment">//app build.gradle</span></span><br><span class="line">dependencies &#123;</span><br><span class="line">	compile(<span class="string">'com.mricefox.firstlayerlib:firstlayerlib:1.0.0'</span>) &#123;</span><br><span class="line">        transitive = <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<ul>
+<li><h4 id="provided"><a href="#provided" class="headerlink" title="provided"></a>provided</h4>仅在编译时可以被使用方依赖，不加入最终apk,<code>provided</code>依赖只能是jar或者java 工程，通常注解处理器<code>annotationProcessor</code>使用这种方式依赖</li>
+</ul>
+<hr>
+<ul>
+<li><h4 id="apk"><a href="#apk" class="headerlink" title="apk"></a>apk</h4>在编译时使用方无法依赖，但是加入最终apk,<code>apk</code>依赖只能是jar或者java 工程,通常在依赖注入方面使用</li>
+</ul>
+<hr>
+<ul>
+<li><h4 id="implementation"><a href="#implementation" class="headerlink" title="implementation"></a>implementation</h4><em>android plugin 3.0.0</em>新加入的<code>configuration</code>，<code>implementation</code>依赖并不暴露给上层使用方，新的<code>implementation</code>可以看做是对<code>transitive</code>只对artifact有效的一个补充，使得<code>project</code>之间的传递依赖可以通过<code>implementation</code> 阻断<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//app不能，而firstlayerlib可以引用到secondlayerlib中代码和资源</span></span><br><span class="line"><span class="comment">//app build.gradle</span></span><br><span class="line">dependencies &#123;</span><br><span class="line">	implementation project(<span class="string">':firstlayerlib'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//firstlayerlib build.gradle</span></span><br><span class="line">dependencies &#123;</span><br><span class="line">	implementation project(<span class="string">':secondlayerlib'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//secondlayerlib build.gradle</span></span><br><span class="line">dependencies &#123;</span><br><span class="line">	<span class="comment">//empty</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>但是如果将<code>firstlayerlib</code>发布出去变成artifact之后，<code>implementation</code>将失效<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//app和firstlayerlib都可以引用到secondlayerlib中代码和资源,implementation失效</span></span><br><span class="line"><span class="comment">//app build.gradle</span></span><br><span class="line">dependencies &#123;</span><br><span class="line">	implementation <span class="string">'com.mricefox.firstlayerlib:firstlayerlib:1.0.0'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//firstlayerlib build.gradle</span></span><br><span class="line">dependencies &#123;</span><br><span class="line">	implementation project(<span class="string">':secondlayerlib'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//secondlayerlib build.gradle</span></span><br><span class="line">dependencies &#123;</span><br><span class="line">	<span class="comment">//empty</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<hr>
+<ul>
+<li><h4 id="api"><a href="#api" class="headerlink" title="api"></a>api</h4><em>android plugin 3.0.0</em>新加入的<code>configuration</code>，和原有的<code>compile</code>相同，与<code>implementation</code>相互补充，将<code>project</code>的依赖划分为暴露给上层(<code>api</code>)，和不暴露给上层(<code>implementation</code>)两个部分,对于顶层<code>project</code>（例如app模块），由于并不被其他<code>project</code>依赖，这两个配置是没有影响的<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//app build.gradle</span></span><br><span class="line">dependencies &#123;</span><br><span class="line">	implementation project(<span class="string">':firstlayerlib'</span>)</span><br><span class="line">	<span class="comment">//与api project(':firstlayerlib')效果一致</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<ul>
+<li><h4 id="compileOnly"><a href="#compileOnly" class="headerlink" title="compileOnly"></a>compileOnly</h4><em>android plugin 3.0.0</em>新加入的<code>configuration</code>，和原有的<code>provided</code>相同</li>
+</ul>
+<hr>
+<ul>
+<li><h4 id="runtimeOnly"><a href="#runtimeOnly" class="headerlink" title="runtimeOnly"></a>runtimeOnly</h4><em>android plugin 3.0.0</em>新加入的<code>configuration</code>，和原有的<code>apk</code>相同</li>
+</ul>
+<hr>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>这次新增的2个依赖配置，仍然没有解决如何让使用方在编译时只依赖子工程的特定部分，来达到多子项目间的解耦。现阶段要达到这个目的，除了实现android版的OSGI以外，就是像微信的一篇文章所讲的那样将<code>project</code>分为暴露和隐藏两个<code>project</code> 。新的依赖配置也没有解决原有的<code>apk</code> <code>provided</code>无法应用在android工程上的问题，但是能够通过<code>implementation</code>缩小依赖范围，对解耦还是有所帮助的。</p>
+<hr>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a href="https://developer.android.com/studio/build/gradle-plugin-3-0-0-migration.html#new_configurations" target="_blank" rel="external">new_configurations</a><br><a href="https://docs.gradle.org/current/userguide/java_library_plugin.html#sec:java_library_configurations_graph" target="_blank" rel="external">java_library_configurations_graph</a></p>
 
       
     </div>
@@ -311,7 +321,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Android-service/" rel="tag">#Android service</a>
+            <a href="/tags/android-gradle-plugin/" rel="tag">#android gradle plugin</a>
           
         </div>
       
@@ -320,17 +330,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/02/23/begin-writing/" rel="next" title="开始写博客">
-                <i class="fa fa-chevron-left"></i> 开始写博客
+              <a href="/2017/03/24/upgrade-to-http2-0/" rel="next" title="Android客户端升级http/2的一些问题">
+                <i class="fa fa-chevron-left"></i> Android客户端升级http/2的一些问题
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/15/dreyfus-model-of-skill-acquisition/" rel="prev" title="德莱弗斯技能学习模型">
-                德莱弗斯技能学习模型 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -356,8 +362,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/03/14/android-bind-service/"
-           data-title="android绑定service" data-url="http://yoursite.com/2016/03/14/android-bind-service/">
+      <div class="ds-thread" data-thread-key="2017/10/27/android-gradle-plugin-3-dependency-configurations/"
+           data-title="android gradle plugin 3.0.0 dependency configurations" data-url="http://yoursite.com/2017/10/27/android-gradle-plugin-3-dependency-configurations/">
       </div>
     
   </div>
@@ -453,7 +459,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#onBind"><span class="nav-number">1.</span> <span class="nav-text">onBind</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重写Binder"><span class="nav-number">2.</span> <span class="nav-text">重写Binder</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Messenger"><span class="nav-number">3.</span> <span class="nav-text">Messenger</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AIDL"><span class="nav-number">4.</span> <span class="nav-text">AIDL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#service线程"><span class="nav-number">5.</span> <span class="nav-text">service线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#activity绑定"><span class="nav-number">6.</span> <span class="nav-text">activity绑定</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内存问题"><span class="nav-number">7.</span> <span class="nav-text">内存问题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#compile"><span class="nav-number">1.</span> <span class="nav-text">compile</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#provided"><span class="nav-number">2.</span> <span class="nav-text">provided</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#apk"><span class="nav-number">3.</span> <span class="nav-text">apk</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#implementation"><span class="nav-number">4.</span> <span class="nav-text">implementation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#api"><span class="nav-number">5.</span> <span class="nav-text">api</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#compileOnly"><span class="nav-number">6.</span> <span class="nav-text">compileOnly</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#runtimeOnly"><span class="nav-number">7.</span> <span class="nav-text">runtimeOnly</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结"><span class="nav-number">8.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参考"><span class="nav-number">9.</span> <span class="nav-text">参考</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
