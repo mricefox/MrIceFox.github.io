@@ -426,19 +426,15 @@
    <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
    
        <script type="text/javascript">
-           function ShowGitment(){
-               document.getElementById("gitment-display-button").style.display = "none";
-               document.getElementById("gitment-container").style.display = "block";
-               var gitment = new Gitment({
-                   id: document.location.href, 
-                   owner: 'MrIceFox',
-                   repo: 'gitment',
-                   oauth: {
-                       client_id: '30848df67f1166865cb2',
-                       client_secret: '110bbe8c7992bc606c73259cc9ef1082886b86dc',
-                   }});
-               gitment.render('gitment-container');
-           }
+           var gitment = new Gitment({
+               id: window.location.pathname, 
+               owner: 'MrIceFox',
+               repo: 'gitment',
+               oauth: {
+                   client_id: '30848df67f1166865cb2',
+                   client_secret: '110bbe8c7992bc606c73259cc9ef1082886b86dc',
+               }});
+           gitment.render('gitment-container');
        </script>
    
 
