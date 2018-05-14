@@ -57,23 +57,23 @@
 
 
 
-<meta name="description" content="本文介绍了在Android组件化的实现中，组件间通信协议的一种全新的组织方式。
+<meta name="description" content="本文介绍了在Android组件化的实现中，组件间通信协议的一种新的组织方式。
 
 协议问题Android组件化的实施过程中，为了达到代码解耦的目的，组件互相之间不能有编译时的依赖关系。但是组件之间又不可避免的需要进行通信，通信就需要协议，就像Http协议一样，客户端和服务端都需要知道这个协议的内容，并且在通信时使用相同的协议才能确保通信的畅通。依据组件化的实现方案的不同，协议的处理大概分为两种：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="android组件化协议管理的一种思路">
 <meta property="og:url" content="http://yoursite.com/2018/04/24/android-modularity-protocal/index.html">
 <meta property="og:site_name" content="Mr.Icefox in coding...">
-<meta property="og:description" content="本文介绍了在Android组件化的实现中，组件间通信协议的一种全新的组织方式。
+<meta property="og:description" content="本文介绍了在Android组件化的实现中，组件间通信协议的一种新的组织方式。
 
 协议问题Android组件化的实施过程中，为了达到代码解耦的目的，组件互相之间不能有编译时的依赖关系。但是组件之间又不可避免的需要进行通信，通信就需要协议，就像Http协议一样，客户端和服务端都需要知道这个协议的内容，并且在通信时使用相同的协议才能确保通信的畅通。依据组件化的实现方案的不同，协议的处理大概分为两种：">
 <meta property="og:image" content="http://yoursite.com/images/sink_service_and_data.png">
 <meta property="og:image" content="http://yoursite.com/images/action_service.png">
 <meta property="og:image" content="http://yoursite.com/images/export_pkg.png">
-<meta property="og:updated_time" content="2018-04-27T09:25:02.870Z">
+<meta property="og:updated_time" content="2018-05-14T08:48:08.315Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="android组件化协议管理的一种思路">
-<meta name="twitter:description" content="本文介绍了在Android组件化的实现中，组件间通信协议的一种全新的组织方式。
+<meta name="twitter:description" content="本文介绍了在Android组件化的实现中，组件间通信协议的一种新的组织方式。
 
 协议问题Android组件化的实施过程中，为了达到代码解耦的目的，组件互相之间不能有编译时的依赖关系。但是组件之间又不可避免的需要进行通信，通信就需要协议，就像Http协议一样，客户端和服务端都需要知道这个协议的内容，并且在通信时使用相同的协议才能确保通信的畅通。依据组件化的实现方案的不同，协议的处理大概分为两种：">
 
@@ -301,7 +301,7 @@
 
       
         <blockquote>
-<p>本文介绍了在Android组件化的实现中，组件间通信协议的一种全新的组织方式。</p>
+<p>本文介绍了在Android组件化的实现中，组件间通信协议的一种新的组织方式。</p>
 </blockquote>
 <h3 id="协议问题"><a href="#协议问题" class="headerlink" title="协议问题"></a>协议问题</h3><p>Android组件化的实施过程中，为了达到代码解耦的目的，<strong>组件互相之间不能有编译时的依赖关系</strong>。但是组件之间又不可避免的需要进行通信，通信就需要协议，就像Http协议一样，客户端和服务端都需要知道这个协议的内容，并且在通信时使用相同的协议才能确保通信的畅通。依据组件化的实现方案的不同，协议的处理大概分为两种：<br><a id="more"></a></p>
 <ol>
@@ -313,8 +313,8 @@
 <p><strong>这两种方式其实都存在问题</strong></p>
 <p>第一种方式，对某个协议修改之后，基础组件必然需要重新编译，继而依赖它的上层组件都需要重新编译。如果这个协议实际上只有两个组件使用，修改它却导致了全部上层组件需要重编译，这样就浪费了编译时间。同时，这些接口和数据结构通常夹杂业务内容，修改的频率较高，如果再加上组件比较多的话，编译时间的增加就比较可观了；另一方面，下沉导致了基础组件代码膨胀，边缘劣化。通信本来只是两者之间的事，协议只要通信双方知道就行了，现在放在基础组件中并不合适，更糟糕的是这些协议还有可能被上层其他组件耦合，修改的时候引起其他问题。</p>
 <p>字符串action+Json的方式，在使用上非常不便，服务通信的时候需要对action逐一处理，并且在两个组件之间各存一份Bean（或者下沉到基础组件中）来转换数据结构。另外双方的action字符串必须一致，容易出错。</p>
-<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>这么看来还是第一种方式比较方便好用，那么问题就是如何让组件之间能够用接口+数据结构作为协议来通信，却又不用下沉到基础组件当中去。首先想到的是Android的进程间通信，使用的协议格式是AIDL，但是AIDL的前提是客户端和服务端都能拿到一个继承了android.os.IInterface的接口，这个在编译时互不依赖的组件之间是无法达成的。</p>
-<p>然后是Java的模块化方案OSGI，作为一个非官方的Java模块化框架，它能够做到在运行时动态的加载代码，并且最重要的是能够做代码的隔离，实现绝对的解耦。它的一个特性：能够在bundle之间导入、导出部分代码，这和现在需要解决的问题十分类似：既然不能下沉，那我们就让协议放在提供服务的组件中，然后让调用方能够拿到协议而不是提供方的全部代码。如下图，好比让两个组件产生了一个交集<br><img src="/images/export_pkg.png" alt=""></p>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><p>这么看来还是第一种方式比较方便好用，那么问题就是如何让组件之间能够用接口+数据结构作为协议来通信，却又不用下沉到基础组件当中去呢。首先想到的是Android的进程间通信，使用的协议格式是AIDL，但是AIDL的前提是客户端和服务端都能拿到一个继承了android.os.IInterface的接口，这在编译时互不依赖的组件之间是无法达成的。</p>
+<p>然后是Java的模块化方案OSGI，作为一个非官方的Java模块化框架，它能够做到在运行时动态的加载代码，并且最重要的是能够做代码的隔离，实现绝对的解耦。它的一个特性：能够在bundle之间导入、导出部分代码。这个特性提供了一个解决的思路，现在需要解决的问题十分类似：既然不能下沉，那我们就让协议放在提供服务的组件中，然后让调用方能够拿到协议而不是提供方的全部代码。如下图，好比让两个组件产生了一个交集<br><img src="/images/export_pkg.png" alt=""></p>
 <p>如何实现这个效果呢，要实现部分依赖肯定需要对android的编译过程做一些修改，我们知道在gradle中依赖通常都是如此添加的<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">dependencies</span>&#123;</span><br><span class="line">	<span class="keyword">compile</span> <span class="keyword">project</span>(<span class="string">':library'</span>)<span class="comment">//本地工程</span></span><br><span class="line">	<span class="keyword">compile</span> <span class="string">'com.android.support:appcompat-v7:26.1.0'</span><span class="comment">//远程文件坐标</span></span><br><span class="line">	<span class="keyword">compile</span> files(<span class="string">'libs/something_local.jar'</span>)<span class="comment">//本地文件</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>既然可以添加一个Jar作为依赖，那么我是不是可以将一个组件的部分代码预先编译成Jar(导出)，然后在另一个模块去依赖这个jar（导入）呢，这样不就实现了部分依赖的效果吗？</p>
 <p>第一步是生成Jar，首先想到我们可以定义一个生成Jar的task，而且这个task的执行必须在Javac这个task之前，但是这将导致异常<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Cannot change <span class="keyword">dependencies</span> of configuration <span class="string">':app:compile'</span> after it has been included in dependency resolution.</span><br></pre></td></tr></table></figure></p>
@@ -333,21 +333,21 @@
 </blockquote>
 <figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">archmage&#123;</span><br><span class="line">	exportPackages = [<span class="string">'com.mricefox.archmage.sample.B.export'</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这样，A就可以直接使用<code>com.mricefox.archmage.sample.B.export</code>这个包里的协议了。</p>
-<h3 id="延伸"><a href="#延伸" class="headerlink" title="延伸"></a>延伸</h3><p>基于这个导入、导出部分包的依赖模型，我们可以做的事情就很多了，所有在组件间需要共享的东西都可以这么导出，不仅可以将组件通信协议，也就是接口+数据结构做导入导出，还可以共享组件之间页面跳转所需的字符串常量。<br>另外，在对基础组件进行精简、把代码上移的过程当中，发现基础组件中含有很多组件的启动任务，比如说各种sdk的初始化、各种初始数据的拉取，这种启动任务其实也应该上移到各个组件当中。简单做法当然是每个组件定义一个类似application的入口，然后在宿主的application中调一下各个组件的入口就可以了，但是问题是如果这些启动任务之间存在依赖关系，必须按照一定顺序来执行呢，如何让组件去设置自己的启动任务在所有启动任务中的执行顺序呢。<br>这里借鉴了微信的一篇文章</p>
+<h3 id="延伸"><a href="#延伸" class="headerlink" title="延伸"></a>延伸</h3><p>基于这个导入、导出部分包的依赖模型，我们可以做的事情就很多了，所有在组件间需要共享的东西都可以这么导出，不仅可以将组件通信协议，也就是接口+数据结构做导入导出，还可以共享组件之间页面跳转所需的字符串常量。<br>另外，在对基础组件进行精简、把代码上移的过程当中，发现基础组件中含有很多组件的启动任务，比如说各种sdk的初始化、各种初始数据的拉取，这种启动任务其实也应该上移到各个组件当中。简单做法当然是每个组件定义一个类似application的入口，然后在宿主的application中调一下各个组件的入口就可以了，但是问题是如果这些启动任务之间存在依赖关系，必须按照一定顺序来执行呢。当然依照刚才说的方式，可以在宿主当中按照顺序调用各个组建的启动入口，但是如何让组件去设置自己的启动任务在所有启动任务中的执行顺序呢。<br>这里借鉴了微信的一篇文章</p>
 <blockquote>
 <p><a href="https://mp.weixin.qq.com/s/6Q818XA5FaHd7jJMFBG60w" target="_blank" rel="external">微信Android模块化架构重构实践</a></p>
 </blockquote>
-<p>给每个启动任务一个别名Alias来作为这个任务的id，其实就是一个空接口，其他任务可以设置before或者after这个Alias来设置启动顺序，通过这个新的依赖模型，我们可以对这些Alias导入导出，这样组件之间就可以设置启动任务的顺序了。<br>基于这个依赖模型，我实现了一个组件化框架，已经开源，欢迎PR</p>
+<p>给每个启动任务一个别名Alias来作为这个任务的id，其实就是一个空接口，其他任务可以设置before或者after这个Alias来设置启动顺序，通过这个新的依赖模型，我们可以对这些Alias导入导出，这样组件之间就可以设置启动任务的顺序了。<br>基于这套协议管理方式，我实现了一个组件化框架，已经开源，欢迎PR</p>
 <blockquote>
-<p><a href="https://github.com/MrIceFox/Archmage/tree/master/archmage-runtime" target="_blank" rel="external">archmage-runtime</a></p>
+<p><a href="https://github.com/MrIceFox/Archmage" target="_blank" rel="external">Archmage</a></p>
 </blockquote>
-<h3 id="缺陷"><a href="#缺陷" class="headerlink" title="缺陷"></a>缺陷</h3><p>上面遗留了一个重要的问题，就是在生成导出Jar包的时候，如何设置javac的classpath。我们知道classpath的设置就看待编译的类文件它引用（import）了哪些类，我们这里待编译的类文件通常是接口+数据结构，或者是一些含常量的类。如果它们引用的类只有android.jar和他们自己（export包里面的所有类），那把classpath设置为android.jar就好了。但是如果引用了一些三方库的类，例如OkHttp、Gson，那我们就需要把这些三方库的Jar也加到classpath，这还没完，如果引用了这些三方库依赖的其他库（例如Okhttp依赖了Okio等其他库），也就是传递依赖了其他库，这要找的Jar就无穷无尽了。相当于我们在这里要把gradle的依赖解析手动做一遍，显然是不可行的。<br>其实作为协议来导出的话，本身并不需要引用太多类，所以这里限制了能够引用的类：</p>
+<h3 id="缺陷"><a href="#缺陷" class="headerlink" title="缺陷"></a>缺陷</h3><p>上面遗留了一个重要的问题，就是在生成导出Jar包的时候，如何设置javac的classpath。我们知道classpath的设置就看待编译的类文件它引用（import）了哪些类，我们这里待编译的类文件通常是接口+数据结构，或者是一些含常量的类。如果它们引用的类只有android.jar和他们自己（export包里面的所有类），那把classpath设置为android.jar就好了。但是如果引用了一些三方库的类，例如OkHttp、Gson，那我们就需要把这些三方库的Jar也加到classpath，这还没完，如果引用了这些三方库依赖的其他库（例如Okhttp依赖了Okio等其他库），也就是传递依赖了其他库，一层层下去，这要找的Jar就无穷无尽了。相当于我们在这里要把gradle的依赖解析手动做一遍，显然是不可行的。<br>其实作为协议来导出的话，本身并不需要引用太多类，所以这里限制了导出包中的类能够引用的类：</p>
 <ol>
 <li>android.jar包含的类</li>
 <li>archmage-runtime中的类，以及它所依赖的所有库</li>
 </ol>
 <p>另外，这个方案并不能解决组件之间资源文件共享的问题难题，公用资源依然需要下沉到基础组件中去。</p>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p>《OSGI原理与最佳实践》<br><a href="https://mp.weixin.qq.com/s/6Q818XA5FaHd7jJMFBG60w" target="_blank" rel="external">微信Android模块化架构重构实践</a><br><a href="https://zhuanlan.zhihu.com/p/31122934" target="_blank" rel="external">如何在 Android Application 里 provided aar</a></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://github.com/alibaba/atlas" target="_blank" rel="external">atlas</a><br>《OSGI原理与最佳实践》<br><a href="https://mp.weixin.qq.com/s/6Q818XA5FaHd7jJMFBG60w" target="_blank" rel="external">微信Android模块化架构重构实践</a><br><a href="https://zhuanlan.zhihu.com/p/31122934" target="_blank" rel="external">如何在 Android Application 里 provided aar</a></p>
 
       
     </div>
